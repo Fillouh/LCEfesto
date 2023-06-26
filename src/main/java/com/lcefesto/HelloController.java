@@ -1,4 +1,4 @@
-package com.lcefesto.lcefesto;
+package com.lcefesto;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

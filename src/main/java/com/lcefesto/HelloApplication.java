@@ -1,4 +1,4 @@
-package com.lcefesto.lcefesto;
+package com.lcefesto;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

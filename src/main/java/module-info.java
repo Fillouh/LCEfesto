@@ -4,6 +4,6 @@ module com.lcefesto.lcefesto {
 
     requires org.controlsfx.controls;
 
-    opens com.lcefesto.lcefesto to javafx.fxml;
-    exports com.lcefesto.lcefesto;
+    opens com.lcefesto to javafx.fxml;
+    exports com.lcefesto;
 }
