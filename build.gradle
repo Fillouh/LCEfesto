@@ -27,8 +27,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'com.lcefesto.lcefesto'
-    mainClass = 'com.lcefesto.lcefesto.HelloApplication'
+    mainModule = 'com.lcefesto'
+    mainClass = 'com.lcefesto.EfestoApplication'
 }
 
 javafx {
