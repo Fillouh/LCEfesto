@@ -191,8 +191,6 @@ public class Measure {
         public static final double CUBIC_INCH_MEASURE= 6.102374*Math.pow(10.0,4.0);
         public static final double CUBIC_MILE_MEASURE=2.3991275857893*Math.pow(10.0,-10.0);
 
-        //ATTRIBUTES FOR MEASURE
-        //double measure;
 
         //FUNCTION FOR MEASURE CONSTANTS
         public static double MeasureToQuetta(double measure){
