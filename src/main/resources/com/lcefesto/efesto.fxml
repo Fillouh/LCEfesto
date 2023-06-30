@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #292929;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lcefesto.EfestoController">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="480.0" style="-fx-background-color: #A93621;">
+         <children>
+            <AnchorPane prefHeight="360.0" prefWidth="480.0">
+               <children>
+                  <ImageView fitHeight="257.0" fitWidth="257.0" layoutX="108.0" layoutY="62.0">
+                     <image>
+                        <Image url="@efesto.png" />
+                     </image>
+                     <effect>
+                        <InnerShadow height="4.0" radius="1.5" width="4.0" />
+                     </effect>
+                  </ImageView>
+               </children></AnchorPane>
+            <GridPane prefHeight="720.0" prefWidth="480.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0" minWidth="320.0" prefWidth="320.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text fill="#c74f39" focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Efesto Inc. © 2023" textAlignment="CENTER" wrappingWidth="320.80340576171875" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="NONE" />
+                     </cursor>
+                  </Text>
+                  <MFXButton fx:id="MathButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#onMathButtonClick" prefHeight="60.0" prefWidth="320.0" rippleAnimateShadow="true" rippleBackgroundOpacity="0.05" rippleColor="#f2f1eb" rippleRadius="5.0" style="-fx-background-color: #C74F39; -fx-background-radius: 24; -fx-text-fill: #f7f5ed; -mfx-auto-clip: true;" styleClass="mfx-button" text="Math" textFill="#f7f5ed" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="StatisticsButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onStatButtonClick" prefHeight="60.0" prefWidth="320.0" rippleAnimateShadow="true" rippleBackgroundOpacity="0.05" rippleColor="#f2f1eb" rippleRadius="5.0" style="-fx-background-color: #C74F39; -fx-background-radius: 24; -fx-text-fill: #f7f5ed; -mfx-auto-clip: true;" styleClass="mfx-button" text="Statistics" textFill="#f7f5ed" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="ConverterButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onConvButtonClick" prefHeight="60.0" prefWidth="320.0" rippleAnimateShadow="true" rippleBackgroundOpacity="0.05" rippleColor="#f2f1eb" rippleRadius="5.0" style="-fx-background-color: #C74F39; -fx-background-radius: 24; -fx-text-fill: #f7f5ed; -mfx-auto-clip: true;" styleClass="mfx-button" text="Converter" textFill="#f7f5ed" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </MFXButton>
+                  <MFXButton fx:id="GraphsButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onGraphsButtonClick" prefHeight="60.0" prefWidth="320.0" rippleAnimateShadow="true" rippleBackgroundOpacity="0.05" rippleColor="#f2f1eb" rippleRadius="5.0" style="-fx-background-color: #C74F39; -fx-background-radius: 24; -fx-text-fill: #f7f5ed; -mfx-auto-clip: true;" styleClass="mfx-button" text="Graphs" textFill="#f7f5ed" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Arial" size="24.0" />
+                     </font>
+                  </MFXButton>
+               </children>
+            </GridPane>
+         </children>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color opacity="0.39694657921791077" />
+               </color>
+            </DropShadow>
+         </effect>
+      </VBox>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1440.0">
+         <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="360.0" prefWidth="1440.0">
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+               <children>
+                  <MFXButton layoutX="1212.0" layoutY="91.0" lineSpacing="1.0E-5" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="Clear" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                     <font>
+                        <Font size="34.0" />
+                     </font></MFXButton>
+                  <TextField fx:id="outputText" editable="false" layoutX="55.0" layoutY="210.0" prefHeight="100.0" prefWidth="1120.0" promptText="Answer." style="-fx-background-color: #FFF2CF; -fx-background-radius: 24;">
+                     <effect>
+                        <InnerShadow height="49.83" offsetY="8.0" radius="11.9575" width="0.0">
+                           <color>
+                              <Color opacity="0.39694657921791077" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="inputText" layoutX="55.0" layoutY="50.0" prefHeight="100.0" prefWidth="1120.0" promptText="Insert one or more numbers, separated by comma." style="-fx-background-color: #FFF2CF; -fx-background-radius: 24;">
+                     <effect>
+                        <InnerShadow height="49.83" offsetY="8.0" radius="11.9575" width="0.0">
+                           <color>
+                              <Color opacity="0.39694657921791077" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <MFXButton layoutX="1212.0" layoutY="199.0" lineSpacing="1.0E-5" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="ANS" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                     <font>
+                        <Font size="34.0" />
+                     </font>
+                  </MFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="720.0" prefWidth="1440.0">
+               <children>
+                  <MFXScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="720.0" prefWidth="1440.0" style="-fx-background-color: transparent;" thumbColor="#99a19b" vbarPolicy="ALWAYS" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</HBox>
