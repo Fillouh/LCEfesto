@@ -1,5 +1,6 @@
 package com.lcefesto.lcefesto;
 
+import com.lcefesto.ops.Converter;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
