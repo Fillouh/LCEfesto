@@ -193,118 +193,118 @@ public class Measure {
 
 
         //FUNCTION FOR MEASURE CONSTANTS
-        public static double MeasureToQuetta(double measure){
+        public static double measureToQuetta(double measure){
             return measure/QUETTA;
         }
-        public static double MeasureToRonna(double measure){
+        public static double measureToRonna(double measure){
             return measure/RONNA;
         }
-        public static double MeasureToYotta(double measure){
+        public static double measureToYotta(double measure){
             return measure/YOTTA;
         }
-        public static double MeasureToZetta(double measure){
+        public static double measureToZetta(double measure){
             return measure/ZETTA;
         }
-        public static double MeasureToExa(double measure){
+        public static double measureToExa(double measure){
             return measure/EXA;
         }
-        public static double MeasureToPeta(double measure){
+        public static double measureToPeta(double measure){
             return measure/PETA;
         }
-        public static double MeasureToTera(double measure){
+        public static double measureToTera(double measure){
             return measure/TERA;
         }
-        public static double MeasureToGiga(double measure){
+        public static double measureToGiga(double measure){
             return measure/GIGA;
         }
-        public static double MeasureToMega(double measure){
+        public static double measureToMega(double measure){
             return measure/MEGA;
         }
-        public static double MeasureToKilo(double measure){
+        public static double measureToKilo(double measure){
             return measure/KILO;
         }
-        public static double MeasureToHecto(double measure){
+        public static double measureToHecto(double measure){
             return measure/HECTO;
         }
-        public static double MeasureToDeca(double measure){
+        public static double measureToDeca(double measure){
             return measure/DECA;
         }
-        public static double MeasureToDeci(double measure){
+        public static double measureToDeci(double measure){
             return measure/DECI;
         }
-        public static double MeasureToCenti(double measure){
+        public static double measureToCenti(double measure){
             return measure/CENTI;
         }
-        public static double MeasureToMilli(double measure){
+        public static double measureToMilli(double measure){
             return measure/MILLI;
         }
-        public static double MeasureToMicro(double measure){
+        public static double measureToMicro(double measure){
             return measure/MICRO;
         }
-        public static double MeasureToNano(double measure){
+        public static double measureToNano(double measure){
             return measure/NANO;
         }
-        public static double MeasureToPico(double measure){
+        public static double measureToPico(double measure){
             return measure/PICO;
         }
-        public static double MeasureToFemto(double measure){
+        public static double measureToFemto(double measure){
             return measure/FEMTO;
         }
-        public static double MeasureToAtto(double measure){
+        public static double measureToAtto(double measure){
             return measure/ATTO;
         }
-        public static double MeasureToZepto(double measure){
+        public static double measureToZepto(double measure){
             return measure/ZEPTO;
         }
-        public static double MeasureToYocto(double measure){
+        public static double measureToYocto(double measure){
             return measure/YOCTO;
         }
-        public static double MeasureToRonto(double measure){
+        public static double measureToRonto(double measure){
             return measure/RONTO;
         }
-        public static double MeasureToQuecto(double measure){
+        public static double measureToQuecto(double measure){
             return measure/QUECTO;
         }
 
         //ACCELERATION
         //UNIT OF MEASURE [m/s^2]
-        public static double AccMetersToGravityAcc(double measure){
+        public static double accMetersToGravityAcc(double measure){
             return measure*GRAVITY_ACC_MEASURE;
         }
-        public static double AccMetersToPlanckAcc(double measure){
+        public static double accMetersToPlanckAcc(double measure){
             return measure * PLANCK_ACC_MEASURE;
         }
-        public static double AccMetersToFPHS(double measure){
+        public static double accMetersToFPHS(double measure){
             return measure*FOOT_PER_HOUR_PER_SECONDS_MEASURE;
         }
-        public static double AccMetersToFPMS(double measure){
+        public static double accMetersToFPMS(double measure){
             return measure*FOOT_PER_MINUTE_PER_SECONDS_MEASURE;
         }
-        public static double AccMetersToGal(double measure){
+        public static double accMetersToGal(double measure){
             return measure*GAL_MEASURE;
         }
-        public static double AccMetersToIPMS(double measure){
+        public static double accMetersToIPMS(double measure){
             return measure*INCH_PER_MINUTE_PER_SECONDS;
         }
-        public static double AccMetersToIPSS(double measure){
+        public static double accMetersToIPSS(double measure){
             return measure*INCH_PER_SECONDS_SQUARED_MEASURE;
         }
-        public static double AccMetersToKnotSeconds(double measure){
+        public static double accMetersToKnotSeconds(double measure){
             return measure*KNOT_PER_SECONDS_MEASURE;
         }
-        public static double AccMetersToMilePerHour(double measure){
+        public static double accMetersToMilePerHour(double measure){
             return measure*MILE_PER_HOURS_MEASURE;
         }
-        public static double AccMetersToMPMS(double measure){
+        public static double accMetersToMPMS(double measure){
             return measure*MILE_PER_MINUTE_PER_SECONDS_MEASURE;
         }
-        public static double AccMetersToMPSS(double measure){
+        public static double accMetersToMPSS(double measure){
             return measure*MILE_PER_SECONDS_SQUARED_MEASURE;
         }
-        public static double GravityAccToAccMeters(double measure){
+        public static double gravityAccToAccMeters(double measure){
             return measure/GRAVITY_ACC_MEASURE;
         }
-        public static double PlanckAccToAccMeters(double measure){
+        public static double planckAccToAccMeters(double measure){
             return measure/PLANCK_ACC_MEASURE;
         }
         public static double FPHSToAccMeters(double measure){
@@ -313,7 +313,7 @@ public class Measure {
         public static double FPMSToAccMeters(double measure){
             return measure/FOOT_PER_MINUTE_PER_SECONDS_MEASURE;
         }
-        public static double GalToAccMeters(double measure){
+        public static double galToAccMeters(double measure){
             return measure/GAL_MEASURE;
         }
         public static double IPMSToAccMeters(double measure){
@@ -322,10 +322,10 @@ public class Measure {
         public static double IPSSToAccMeters(double measure){
             return measure/INCH_PER_SECONDS_SQUARED_MEASURE;
         }
-        public static double KnotSecondsToAccMeters(double measure){
+        public static double knotSecondsToAccMeters(double measure){
             return measure/KNOT_PER_SECONDS_MEASURE;
         }
-        public static double MilePerHourToAccMeters(double measure){
+        public static double milePerHourToAccMeters(double measure){
             return measure/MILE_PER_HOURS_MEASURE;
         }
         public static double MPMSToAccMeters(double measure){
@@ -337,303 +337,303 @@ public class Measure {
 
         //ANGULAR ACCELERATION
         //UNIT OF MEASURE [Grad/s^2]
-        public static double GradSecondSquaredToRadSecondSquared(double measure){
+        public static double gradSecondSquaredToRadSecondSquared(double measure){
             return measure*RADIANT_SECONDS_SQUARED_MEASURE;
         }
-        public static double RadSecondSquaredToGradSecondSquared(double measure){
+        public static double radSecondSquaredToGradSecondSquared(double measure){
             return measure/RADIANT_SECONDS_SQUARED_MEASURE;
         }
 
         //ANGLE
         //UNIT OF MEASURE [Grad°]
-        public static double GradToRad(double measure){
+        public static double gradToRad(double measure){
             return measure*RADIANT_MEASURE;
         }
-        public static double GradtoGon(double measure){
+        public static double gradtoGon(double measure){
             return measure*GON_MEASURE;
         }
-        public static double GradToMinuteOfArc(double measure){
+        public static double gradToMinuteOfArc(double measure){
             return measure*MINUTE_OF_ARC_MEASURE;
         }
-        public static double GradToSecondOfArc(double measure){
+        public static double gradToSecondOfArc(double measure){
             return measure*SECONDS_OF_ARC_MEASURE;
         }
-        public static double RadToGrad(double measure){
+        public static double radToGrad(double measure){
             return measure/RADIANT_MEASURE;
         }
-        public static double GonToGrad(double measure){
+        public static double gonToGrad(double measure){
             return measure/GON_MEASURE;
         }
-        public static double MinuteOfArcToGrad(double measure){
+        public static double minuteOfArcToGrad(double measure){
             return measure/MINUTE_OF_ARC_MEASURE;
         }
-        public static double SecondOfArcToGrad(double measure){
+        public static double secondOfArcToGrad(double measure){
             return measure/SECONDS_OF_ARC_MEASURE;
         }
 
         //BIT & BYTES
-        public static double BitToByte(double measure){
+        public static double bitToByte(double measure){
             return measure*BYTE_MEASURE;
         }
-        public static double ByteToBit(double measure){
+        public static double byteToBit(double measure){
             return measure/BYTE_MEASURE;
         }
 
         //DENSITY
         //UNIT OF MEASURE [kg/m^3]
-        public static double KiloCubicMetersToPlanckDensity(double measure){
+        public static double kiloCubicMetersToPlanckDensity(double measure){
             return measure*PLANCK_DENSITY_MEASURE;
         }
-        public static double KiloCubicMetersToOuncePerCubicFoot(double measure){
+        public static double kiloCubicMetersToOuncePerCubicFoot(double measure){
             return measure*OUNCE_PER_CUBIC_FOOT_MEASURE;
         }
-        public static double KiloCubicMetersToOuncePerCubicInch(double measure){
+        public static double kiloCubicMetersToOuncePerCubicInch(double measure){
             return measure*OUNCE_PER_CUBIC_INCH_MEASURE;
         }
-        public static double KiloCubicMetersToOuncePerGallon(double measure){
+        public static double kiloCubicMetersToOuncePerGallon(double measure){
             return measure*OUNCE_PER_GALLON_MEASURE;
         }
-        public static double KiloCubicMetersToPoundPerCubicFoot(double measure){
+        public static double kiloCubicMetersToPoundPerCubicFoot(double measure){
             return measure*POUND_PER_CUBIC_FOOT_MEASURE;
         }
-        public static double KiloCubicMetersToPoundPerCubicInch(double measure){
+        public static double kiloCubicMetersToPoundPerCubicInch(double measure){
             return measure*POUND_PER_CUBIC_INCH_MEASURE;
         }
-        public static double KiloCubicMetersToPoundPerGallon(double measure){
+        public static double kiloCubicMetersToPoundPerGallon(double measure){
             return measure*POUND_PER_GALLON_MEASURE;
         }
-        public static double KiloCubicMetersToSlugPerCubicFoot(double measure){
+        public static double kiloCubicMetersToSlugPerCubicFoot(double measure){
             return measure*SLUG_PER_CUBIC_FOOT_MEASURE;
         }
-        public static double PlanckDensityToKiloCubicMeters(double measure){
+        public static double planckDensityToKiloCubicMeters(double measure){
             return measure/PLANCK_DENSITY_MEASURE;
         }
-        public static double OuncePerCubicFootToKiloCubicMeters(double measure){
+        public static double ouncePerCubicFootToKiloCubicMeters(double measure){
             return measure/OUNCE_PER_CUBIC_FOOT_MEASURE;
         }
-        public static double OuncePerCubicInchToKiloCubicMeters(double measure){
+        public static double ouncePerCubicInchToKiloCubicMeters(double measure){
             return measure/OUNCE_PER_CUBIC_INCH_MEASURE;
         }
-        public static double OuncePerGallonToKiloCubicMeters(double measure){
+        public static double ouncePerGallonToKiloCubicMeters(double measure){
             return measure/OUNCE_PER_GALLON_MEASURE;
         }
-        public static double PoundPerCubicFootToKiloCubicMeters(double measure){
+        public static double poundPerCubicFootToKiloCubicMeters(double measure){
             return measure/POUND_PER_CUBIC_FOOT_MEASURE;
         }
-        public static double PoundPerCubicInchToKiloCubicMeters(double measure){
+        public static double poundPerCubicInchToKiloCubicMeters(double measure){
             return measure/POUND_PER_CUBIC_INCH_MEASURE;
         }
-        public static double PoundPerGallonToKiloCubicMeters(double measure){
+        public static double poundPerGallonToKiloCubicMeters(double measure){
             return measure/POUND_PER_GALLON_MEASURE;
         }
-        public static double SlugPerCubicFootToKiloCubicMeters(double measure){
+        public static double slugPerCubicFootToKiloCubicMeters(double measure){
             return measure/SLUG_PER_CUBIC_FOOT_MEASURE;
         }
 
         //ENERGY
         //UNIT OF MEASURE [J]
-        public static double JouleToBritishThermalUnit(double measure){
+        public static double jouleToBritishThermalUnit(double measure){
             return measure*BRITISH_THERMAL_UNIT_MEASURE;
         }
-        public static double JouleToCalories(double measure){
+        public static double jouleToCalories(double measure){
             return measure*CALORIES_MEASURE;
         }
-        public static double JouleToElettronVolt(double measure){
+        public static double jouleToElettronVolt(double measure){
             return measure*ELETTRONVOLT_MEASURE;
         }
-        public static double JouleToPlanckEnergy(double measure){
+        public static double jouleToPlanckEnergy(double measure){
             return measure*PLANCK_ENERGY_MEASURE;
         }
-        public static double JouleToErg(double measure){
+        public static double jouleToErg(double measure){
             return measure*ERG_MEASURE;
         }
-        public static double JouleToFootPoundForce(double measure){
+        public static double jouleToFootPoundForce(double measure){
             return measure*FOOT_POUND_FORCE_MEASURE;
         }
-        public static double JouleToFootPoundal(double measure){
+        public static double jouleToFootPoundal(double measure){
             return measure*FOOT_POUNDAL_MEASURE;
         }
-        public static double JouleToHartree(double measure){
+        public static double jouleToHartree(double measure){
             return measure*HARTREE_MEASURE;
         }
-        public static double JouleToHorsepowerPerHour(double measure){
+        public static double jouleToHorsepowerPerHour(double measure){
             return measure*HORSEPOWER_PER_HOUR_MEASURE;
         }
-        public static double JouleToInchPoundForce(double measure){
+        public static double jouleToInchPoundForce(double measure){
             return measure*INCH_POUND_FORCE_MEASURE;
         }
-        public static double JouleToLitreAtmosphere(double measure){
+        public static double jouleToLitreAtmosphere(double measure){
             return measure*LITRE_ATMOSPHERE_MEASURE;
         }
-        public static double JouleToQuad(double measure){
+        public static double jouleToQuad(double measure){
             return measure*QUAD_MEASURE;
         }
-        public static double JouleToRydberg(double measure){
+        public static double jouleToRydberg(double measure){
             return measure*RYDBERG_MEASURE;
         }
-        public static double JouleToTherm(double measure){
+        public static double jouleToTherm(double measure){
             return measure*THERM_MEASURE;
         }
-        public static double JouleToWattHour(double measure){
+        public static double jouleToWattHour(double measure){
             return measure*WATT_HOUR_MEASURE;
         }
-        public static double BritishThermalUnitToJoule(double measure){
+        public static double britishThermalUnitToJoule(double measure){
             return measure/BRITISH_THERMAL_UNIT_MEASURE;
         }
-        public static double CaloriesToJoule(double measure){
+        public static double caloriesToJoule(double measure){
             return measure/CALORIES_MEASURE;
         }
-        public static double ElettronVoltToJoule(double measure){
+        public static double elettronVoltToJoule(double measure){
             return measure/ELETTRONVOLT_MEASURE;
         }
-        public static double PlanckEnergyToJoule(double measure){
+        public static double planckEnergyToJoule(double measure){
             return measure/PLANCK_ENERGY_MEASURE;
         }
-        public static double ErgToJoule(double measure){
+        public static double ergToJoule(double measure){
             return measure/ERG_MEASURE;
         }
-        public static double FootPoundForceToJoule(double measure){
+        public static double footPoundForceToJoule(double measure){
             return measure/FOOT_POUND_FORCE_MEASURE;
         }
-        public static double FootPoundalToJoule(double measure){
+        public static double footPoundalToJoule(double measure){
             return measure/FOOT_POUNDAL_MEASURE;
         }
-        public static double HartreeToJoule(double measure){
+        public static double hartreeToJoule(double measure){
             return measure/HARTREE_MEASURE;
         }
-        public static double HorsepowerPerHourToJoule(double measure){
+        public static double horsepowerPerHourToJoule(double measure){
             return measure/HORSEPOWER_PER_HOUR_MEASURE;
         }
-        public static double InchPoundForceToJoule(double measure){
+        public static double inchPoundForceToJoule(double measure){
             return measure/INCH_POUND_FORCE_MEASURE;
         }
-        public static double LitreAtmosphereToJoule(double measure){
+        public static double litreAtmosphereToJoule(double measure){
             return measure/LITRE_ATMOSPHERE_MEASURE;
         }
-        public static double QuadToJoule(double measure){
+        public static double quadToJoule(double measure){
             return measure/QUAD_MEASURE;
         }
-        public static double RydbergToJoule(double measure){
+        public static double rydbergToJoule(double measure){
             return measure/RYDBERG_MEASURE;
         }
-        public static double WattHourToJoule(double measure){
+        public static double wattHourToJoule(double measure){
             return measure/WATT_HOUR_MEASURE;
         }
 
         //MOLAR ENERGY
         //UNIT OF MEASURE [J/mol]
-        public static double JouleMoleToKilocalMole(double measure){
+        public static double jouleMoleToKilocalMole(double measure){
             return measure*KILOCAL_MOLE_MEASURE;
         }
-        public static double KilocalMoleToJouleMole(double measure){
+        public static double kilocalMoleToJouleMole(double measure){
             return measure/KILOCAL_MOLE_MEASURE;
         }
 
         //LUMINOUS FLUX
         //UNIT OF MEASURE [Lumen]
-        public static double LumenToSphericalCandlePower(double measure){
+        public static double lumenToSphericalCandlePower(double measure){
             return measure*SPHERICAL_CANDLE_POWER_MEASURE;
         }
-        public static double LumenToWattLedLamp(double measure){
+        public static double lumenToWattLedLamp(double measure){
             return measure*WATT_LED_LAMP_MEASURE;
         }
-        public static double LumenToWattLamp(double measure){
+        public static double lumenToWattLamp(double measure){
             return measure*WATT_LAMP_POWER;
         }
-        public static double SphericalCandlePowerToLumen(double measure){
+        public static double sphericalCandlePowerToLumen(double measure){
             return measure/SPHERICAL_CANDLE_POWER_MEASURE;
         }
-        public static double WattLedLampToLumen(double measure){
+        public static double wattLedLampToLumen(double measure){
             return measure/WATT_LED_LAMP_MEASURE;
         }
-        public static double WattLampToLumen(double measure){
+        public static double wattLampToLumen(double measure){
             return measure/WATT_LAMP_POWER;
         }
 
         //MAGNETIC FLOW
         //UNIT OF MEASURE [Weber]
-        public static double WeberToPlanckMagneticFlow(double measure){
+        public static double weberToPlanckMagneticFlow(double measure){
             return measure*PLANCK_MAGNETIC_FLOW_MEASURE;
         }
-        public static double PlanckMagneticFlowToWeber(double measure){
+        public static double planckMagneticFlowToWeber(double measure){
             return measure/PLANCK_MAGNETIC_FLOW_MEASURE;
         }
 
         //FORCE
         //UNIT OF MEASURE [N]
-        public static double NewtonToKilograms(double measure){
+        public static double newtonToKilograms(double measure){
             return measure/NEWTON_MEASURE;
         }
-        public static double NewtonToKilogramForce(double measure){
+        public static double newtonToKilogramForce(double measure){
             return measure*KILOGRAM_FORCE_MEASURE;
         }
-        public static double NewtonToAtomicUnitOfForce(double measure){
+        public static double newtonToAtomicUnitOfForce(double measure){
             return measure*ATOMIC_UNIT_OF_FORCE_MEASURE;
         }
-        public static double NewtonToDyn(double measure){
+        public static double newtonToDyn(double measure){
             return measure*DYN_MEASURE;
         }
-        public static double NewtonToPlanckForce(double measure){
+        public static double newtonToPlanckForce(double measure){
             return measure*PLANCK_FORCE_MEASURE;
         }
-        public static double NewtonToOunceForce(double measure){
+        public static double newtonToOunceForce(double measure){
             return measure*OUNCE_FORCE_MEASURE;
         }
-        public static double NewtonToPoundForce(double measure){
+        public static double newtonToPoundForce(double measure){
             return measure*POUND_FORCE_MEASURE;
         }
-        public static double NewtonToPoundal(double measure){
+        public static double newtonToPoundal(double measure){
             return measure*POUNDAL_MEASURE;
         }
-        public static double NewtonToSthene(double measure){
+        public static double newtonToSthene(double measure){
             return measure*STHENE_MEASURE;
         }
-        public static double NewtonToTonForce(double measure){
+        public static double newtonToTonForce(double measure){
             return measure*TON_FORCE_MEASURE;
         }
-        public static double KilogramForceToNewton(double measure){
+        public static double kilogramForceToNewton(double measure){
             return measure/KILOGRAM_FORCE_MEASURE;
         }
-        public static double AtomicUnitOfForceToNewton(double measure){
+        public static double atomicUnitOfForceToNewton(double measure){
             return measure/ATOMIC_UNIT_OF_FORCE_MEASURE;
         }
-        public static double DynToNewton(double measure){
+        public static double dynToNewton(double measure){
             return measure/DYN_MEASURE;
         }
-        public static double PlanckForceToNewton(double measure){
+        public static double planckForceToNewton(double measure){
             return measure/PLANCK_FORCE_MEASURE;
         }
-        public static double OunceForceToNewton(double measure){
+        public static double ounceForceToNewton(double measure){
             return measure/OUNCE_FORCE_MEASURE;
         }
-        public static double PoundForceToNewton(double measure){
+        public static double poundForceToNewton(double measure){
             return measure/POUND_FORCE_MEASURE;
         }
-        public static double PoundalToNewton(double measure){
+        public static double poundalToNewton(double measure){
             return measure/POUNDAL_MEASURE;
         }
-        public static double StheneToNewton(double measure){
+        public static double stheneToNewton(double measure){
             return measure/STHENE_MEASURE;
         }
-        public static double TonForceToNewton(double measure){
+        public static double tonForceToNewton(double measure){
             return measure/TON_FORCE_MEASURE;
         }
 
         //FREQUENCE
         //UNIT OF MEASURE [Hz]
-        public static double HertzToSeconds(double measure){
+        public static double hertzToSeconds(double measure){
             return 1.0/measure;
         }
-        public static double HertzToRPM(double measure){
+        public static double hertzToRPM(double measure){
             return measure*MINUTE_MEASURE;
         }
-        public static double HertzToPlanckFrequence(double measure){
+        public static double hertzToPlanckFrequence(double measure){
             return measure*PLANCK_FREQUENCE_MEASURE;
         }
-        public static double PlanckFrequenceToHertz(double measure){
+        public static double planckFrequenceToHertz(double measure){
             return measure/PLANCK_FREQUENCE_MEASURE;
         }
-        public static double SecondsToHertz(double measure){
+        public static double secondsToHertz(double measure){
             return 1.0/measure;
         }
         public static double RPMToHertz(double measure){
@@ -642,421 +642,421 @@ public class Measure {
 
         //ILLUMINANCE
         //UNIT OF MEASURE [Lux]
-        public static double LuxToFootCandle(double measure){
+        public static double luxToFootCandle(double measure){
             return measure*FOOT_CANDLE_MEASURE;
         }
-        public static double LuxToNox(double measure){
+        public static double luxToNox(double measure){
             return measure*NOX_MEASURE;
         }
-        public static double LuxToPhot(double measure){
+        public static double luxToPhot(double measure){
             return measure*PHOT_MEASURE;
         }
-        public static double FootCandleToLux(double measure){
+        public static double footCandleToLux(double measure){
             return measure/FOOT_CANDLE_MEASURE;
         }
-        public static double NoxToLux(double measure){
+        public static double noxToLux(double measure){
             return measure/NOX_MEASURE;
         }
-        public static double PhotToLux(double measure){
+        public static double photToLux(double measure){
             return measure/PHOT_MEASURE;
         }
 
         //LIGHT INTENSITY
         //UNIT OF MEASURE [Cd]
-        public static double CandleToBerlinerLichteinheit(double measure){
+        public static double candleToBerlinerLichteinheit(double measure){
             return measure*BERLINER_LICHTEINHEIT_MEASURE;
         }
-        public static double CandleToCandlePower(double measure){
+        public static double candleToCandlePower(double measure){
             return measure*CANDLE_POWER_MEASURE;
         }
-        public static double CandleToHefnerkerze(double measure){
+        public static double candleToHefnerkerze(double measure){
             return measure*HEFNERKERZE_MEASURE;
         }
-        public static double BerlinerLichteinheitToCandle(double measure){
+        public static double berlinerLichteinheitToCandle(double measure){
             return measure/BERLINER_LICHTEINHEIT_MEASURE;
         }
-        public static double CandlePowerToCandle(double measure){
+        public static double candlePowerToCandle(double measure){
             return measure/CANDLE_POWER_MEASURE;
         }
-        public static double HefnerkerzeToCandle(double measure){
+        public static double hefnerkerzeToCandle(double measure){
             return measure/HEFNERKERZE_MEASURE;
         }
 
         //LEVEL
         //UNIT OF MEASURE [db]
-        public static double DecibelToNeper(double measure){
+        public static double decibelToNeper(double measure){
             return measure*NEPER_MEASURE;
         }
-        public static double NeperToDecibel(double measure){
+        public static double neperToDecibel(double measure){
             return measure/NEPER_MEASURE;
         }
 
         //LENGHT:
         //UNIT OF MEASURE : meters [m]
-        public static double MetersToMile(double measure){
+        public static double metersToMile(double measure){
             return measure*MILE_MEASURE;
         }
-        public static double MetersToYard(double measure){
+        public static double metersToYard(double measure){
             return measure*YARD_MEASURE;
         }
-        public static double MetersToFoot(double measure){
+        public static double metersToFoot(double measure){
             return measure*FOOT_MEASURE;
         }
-        public static double MetersToInch(double measure){
+        public static double metersToInch(double measure){
             return measure*INCH_MEASURE;
         }
-        public static double MetersToNauticalMile(double measure){
+        public static double metersToNauticalMile(double measure){
             return measure*NAUMILE_MEASURE;
         }
-        public static double MetersToAngstrom(double measure){
+        public static double metersToAngstrom(double measure){
             return measure*ANGSTROM_MEASURE;
         }
-        public static double MetersToLightYear(double measure){
+        public static double metersToLightYear(double measure){
             return measure*LIGHT_YEAR_MEASURE;
         }
-        public static double MileToMeters(double measure){
+        public static double mileToMeters(double measure){
             return measure/MILE_MEASURE;
         }
-        public static double YardToMeters(double measure){
+        public static double yardToMeters(double measure){
             return measure/YARD_MEASURE;
         }
-        public static double FootToMeters(double measure){
+        public static double footToMeters(double measure){
             return measure/FOOT_MEASURE;
         }
-        public static double InchToMeters(double measure){
+        public static double inchToMeters(double measure){
             return measure/INCH_MEASURE;
         }
-        public static double NauticalMileToMeters(double measure){
+        public static double nauticalMileToMeters(double measure){
             return measure*NAUMILE_MEASURE;
         }
-        public static double AngstromToMeters(double measure){
+        public static double angstromToMeters(double measure){
             return measure/ANGSTROM_MEASURE;
         }
-        public static double LightYearToMeters(double measure){
+        public static double lightYearToMeters(double measure){
             return measure/LIGHT_YEAR_MEASURE;
         }
 
         //MASS
         //UNIT OF MEASURE : [kg]
-        public static double KilogramToMetricTon(double measure){
+        public static double kilogramToMetricTon(double measure){
             return measure/KILO;
         }
-        public static double KilogramToLongTon(double measure){
+        public static double kilogramToLongTon(double measure){
             return measure*LONGTON_MEASURE;
         }
-        public static double KilogramToShortTon(double measure){
+        public static double kilogramToShortTon(double measure){
             return measure*SHORTTON_MEASURE;
         }
-        public static double KilogramToStone(double measure){
+        public static double kilogramToStone(double measure){
             return measure*STONE_MEASURE;
         }
-        public static double KilogramToPound(double measure){
+        public static double kilogramToPound(double measure){
             return measure*POUND_MEASURE;
         }
-        public static double KilogramToOunce(double measure){
+        public static double kilogramToOunce(double measure){
             return measure*OUNCE_MEASURE;
         }
-        public static double KilogramToNewton(double measure){
+        public static double kilogramToNewton(double measure){
             return measure*NEWTON_MEASURE;
         }
-        public static double MetricTonToKilogram(double measure){
+        public static double metricTonToKilogram(double measure){
             return measure*KILO;
         }
-        public static double LongTonToKilogram(double measure){
+        public static double longTonToKilogram(double measure){
             return measure/LONGTON_MEASURE;
         }
-        public static double ShortTonToKilogram(double measure){
+        public static double shortTonToKilogram(double measure){
             return measure/SHORTTON_MEASURE;
         }
-        public static double StoneToKilogram(double measure){
+        public static double stoneToKilogram(double measure){
             return measure/STONE_MEASURE;
         }
-        public static double PoundToKilogram(double measure){
+        public static double poundToKilogram(double measure){
             return measure/POUND_MEASURE;
         }
-        public static double OunceToKilogram(double measure){
+        public static double ounceToKilogram(double measure){
             return measure/OUNCE_MEASURE;
         }
 
         //ANGULAR MOMENT
         //UNIT OF MEASURE [(kg*m^2)/s]
-        public static double NewtonMetersSecondToPlanckConstant(double measure){
+        public static double newtonMetersSecondToPlanckConstant(double measure){
             return measure*PLANCK_CONSTANT_MEASURE;
         }
-        public static double PlanckConstantToNewtonMetersSecond(double measure){
+        public static double planckConstantToNewtonMetersSecond(double measure){
             return measure/PLANCK_CONSTANT_MEASURE;
         }
 
         //PARTS-PER
         //UNIT OF MEASURE [%]
-        public static double PercentToPerThousand(double measure){
+        public static double percentToPerThousand(double measure){
             return measure*DECA;
         }
-        public static double PercentToPartsPerMillion(double measure){
+        public static double percentToPartsPerMillion(double measure){
             return measure*DECA*KILO;
         }
-        public static double PercentToPartsPerBillion(double measure){
+        public static double percentToPartsPerBillion(double measure){
             return measure*DECA*MEGA;
         }
-        public static double PerThousandToPercent(double measure){
+        public static double perThousandToPercent(double measure){
             return measure/DECA;
         }
-        public static double PartsPerMillionToPercent(double measure){
+        public static double partsPerMillionToPercent(double measure){
             return measure/(DECA*KILO);
         }
-        public static double PartsPerBillionToPercent(double measure){
+        public static double partsPerBillionToPercent(double measure){
             return measure/(DECA*MEGA);
         }
 
         //POWER
         //UNIT OF MEASURE [W]
-        public static double WattToMechanicalHorsePower(double measure){
+        public static double wattToMechanicalHorsePower(double measure){
             return measure*MECHANICAL_HORSE_POWER_MEASURE;
         }
-        public static double WattToBTUPerMinutes(double measure){
+        public static double wattToBTUPerMinutes(double measure){
             return measure*BTU_SECOND_MEASURE;
         }
-        public static double WattToCaloriesSecond(double measure){
+        public static double wattToCaloriesSecond(double measure){
             return measure*CALORIES_SECOND_MEASURE;
         }
-        public static double WattToPlanckLeistungPower(double measure){
+        public static double wattToPlanckLeistungPower(double measure){
             return measure*PLANCK_LEISTUNG_POWER_MEASURE;
         }
-        public static double MechanicalHorsePowerToWatt(double measure){
+        public static double mechanicalHorsePowerToWatt(double measure){
             return measure/MECHANICAL_HORSE_POWER_MEASURE;
         }
         public static double BTUPerMinutesToWatt(double measure){
             return measure/BTU_SECOND_MEASURE;
         }
-        public static double CaloriesSecondToWatt(double measure){
+        public static double caloriesSecondToWatt(double measure){
             return measure/CALORIES_SECOND_MEASURE;
         }
-        public static double PlanckLeistungPowerToWatt(double measure){
+        public static double planckLeistungPowerToWatt(double measure){
             return measure/PLANCK_LEISTUNG_POWER_MEASURE;
         }
 
         //PRESSURE
         //UNIT OF MEASURE [Pascal]
-        public static double PascalToAtmosphere(double measure){
+        public static double pascalToAtmosphere(double measure){
             return measure*ATMOSPHERE_MEASURE;
         }
-        public static double PascalToBar(double measure){
+        public static double pascalToBar(double measure){
             return measure*BAR_MEASURE;
         }
-        public static double PascalToPoundPerSquaredFoot(double measure){
+        public static double pascalToPoundPerSquaredFoot(double measure){
             return measure*POUND_PER_SQUARED_FOOT_MEASURE;
         }
-        public static double PascalToPoundPerSquaredInch(double measure){
+        public static double pascalToPoundPerSquaredInch(double measure){
             return measure*POUND_PER_SQUARED_INCH_MEASURE;
         }
-        public static double PascalToTorr(double measure){
+        public static double pascalToTorr(double measure){
             return measure*TORR_MEASURE;
         }
-        public static double AtmosphereToPascal(double measure){
+        public static double atmosphereToPascal(double measure){
             return measure/ATMOSPHERE_MEASURE;
         }
-        public static double BarToPascal(double measure){
+        public static double barToPascal(double measure){
             return measure/BAR_MEASURE;
         }
-        public static double PoundPerSquaredFootToPascal(double measure){
+        public static double poundPerSquaredFootToPascal(double measure){
             return measure/POUND_PER_SQUARED_FOOT_MEASURE;
         }
-        public static double PoundPerSquaredInchToPascal(double measure){
+        public static double poundPerSquaredInchToPascal(double measure){
             return measure/POUND_PER_SQUARED_INCH_MEASURE;
         }
-        public static double TorrToPascal(double measure){
+        public static double torrToPascal(double measure){
             return measure/TORR_MEASURE;
         }
 
         //SURFACE
         //UNIT OF MEASURE [m^2]
-        public static double SquaredMetersToAcre(double measure){
+        public static double squaredMetersToAcre(double measure){
             return measure*ACRE_MEASURE;
         }
-        public static double SquaredMetersToCircularInch(double measure){
+        public static double squaredMetersToCircularInch(double measure){
             return measure*CIRCULAR_INCH_MEASURE;
         }
-        public static double SquaredMetersToSquaredFoot(double measure){
+        public static double squaredMetersToSquaredFoot(double measure){
             return measure*SQUARED_FOOT_MEASURE;
         }
-        public static double SquaredMetersToSquaredInch(double measure){
+        public static double squaredMetersToSquaredInch(double measure){
             return measure*SQUARED_INCH_MEASURE;
         }
-        public static double AcreToSquaredMeters(double measure){
+        public static double acreToSquaredMeters(double measure){
             return measure/ACRE_MEASURE;
         }
-        public static double CircularInchToSquaredMeters(double measure){
+        public static double circularInchToSquaredMeters(double measure){
             return measure/CIRCULAR_INCH_MEASURE;
         }
-        public static double SquaredFootToSquaredMeters(double measure){
+        public static double squaredFootToSquaredMeters(double measure){
             return measure/SQUARED_FOOT_MEASURE;
         }
-        public static double SquaredInchToSquaredMeters(double measure){
+        public static double squaredInchToSquaredMeters(double measure){
             return measure/SQUARED_INCH_MEASURE;
         }
 
         //TEMPERATURE
         //UNIT OF MEASURE [°C]
-        public static double CelsiusToKelvin(double measure){
+        public static double celsiusToKelvin(double measure){
             return measure+KELVIN_MEASURE;
         }
-        public static double CelsiusToFahrenheit(double measure){
+        public static double celsiusToFahrenheit(double measure){
             return measure+FAHRENHEIT_MEASURE;
         }
-        public static double CelsiusToRankine(double measure){
+        public static double celsiusToRankine(double measure){
             return measure+RANKINE_MEASURE;
         }
-        public static double KelvinToCelsius(double measure){
+        public static double kelvinToCelsius(double measure){
             return measure-KELVIN_MEASURE;
         }
-        public static double FahrenheitToCelsius(double measure){
+        public static double fahrenheitToCelsius(double measure){
             return measure-FAHRENHEIT_MEASURE;
         }
-        public static double RankineToCelsius(double measure){
+        public static double rankineToCelsius(double measure){
             return measure-RANKINE_MEASURE;
         }
 
         //TIME
         //UNIT OF MEASURE [s]
-        public static double SecondsToMinutes(double measure){
+        public static double secondsToMinutes(double measure){
             return measure/MINUTE_MEASURE;
         }
-        public static double SecondsToHours(double measure){
+        public static double secondsToHours(double measure){
             return measure/HOUR_MEASURE;
         }
-        public static double SecondsToDays(double measure){
+        public static double secondsToDays(double measure){
             return measure/DAY_MEASURE;
         }
-        public static double SecondsToWeeks(double measure){
+        public static double secondsToWeeks(double measure){
             return measure/WEEK_MEASURE;
         }
-        public static double SecondsToMonths(double measure){
+        public static double secondsToMonths(double measure){
             return measure/MONTH_MEASURE;
         }
-        public static double SecondsToYears(double measure){
+        public static double secondsToYears(double measure){
             return measure/YEAR_MEASURE;
         }
-        public static double SecondsToDecades(double measure){
+        public static double secondsToDecades(double measure){
             return measure/DECADE_MEASURE;
         }
-        public static double SecondsToCenturies(double measure){
+        public static double secondsToCenturies(double measure){
             return measure/CENTURY_MEASURE;
         }
-        public static double MinutesToSeconds(double measure){
+        public static double minutesToSeconds(double measure){
             return measure*MINUTE_MEASURE;
         }
-        public static double HoursToSeconds(double measure){
+        public static double hoursToSeconds(double measure){
             return measure*HOUR_MEASURE;
         }
-        public static double DaysToSeconds(double measure){
+        public static double daysToSeconds(double measure){
             return measure*DAY_MEASURE;
         }
-        public static double WeekToSeconds(double measure){
+        public static double weekToSeconds(double measure){
             return measure*WEEK_MEASURE;
         }
-        public static double MonthsToSeconds(double measure){
+        public static double monthsToSeconds(double measure){
             return measure*MONTH_MEASURE;
         }
-        public static double YearsToSeconds(double measure){
+        public static double yearsToSeconds(double measure){
             return measure*YEAR_MEASURE;
         }
-        public static double DecadesToSeconds(double measure){
+        public static double decadesToSeconds(double measure){
             return measure*DECADE_MEASURE;
         }
-        public static double CenturiesToSeconds(double measure){
+        public static double centuriesToSeconds(double measure){
             return measure*CENTURY_MEASURE;
         }
 
         //SPEED
         //UNIT OF MEASURE [m/s]
-        public static double MetersPerSecondToFeetPerSecond(double measure){
+        public static double metersPerSecondToFeetPerSecond(double measure){
             return measure*FEET_PER_SECOND_MEASURE;
         }
-        public static double MetersPerSecondToInchPerSecond(double measure){
+        public static double metersPerSecondToInchPerSecond(double measure){
             return measure*INCH_PER_SECOND_MEASURE;
         }
-        public static double MetersPerSecondToMilePerSecond(double measure){
+        public static double metersPerSecondToMilePerSecond(double measure){
             return measure*MILE_PER_SECOND_MEASURE;
         }
-        public static double MetersPerSecondToBeaufort(double measure){
+        public static double metersPerSecondToBeaufort(double measure){
             return measure*BEAUFORT_MEASURE;
         }
-        public static double FeetPerSecondToMetersPerSecond(double measure){
+        public static double feetPerSecondToMetersPerSecond(double measure){
             return measure/FEET_PER_SECOND_MEASURE;
         }
-        public static double InchPerSecondToMetersPerSecond(double measure){
+        public static double inchPerSecondToMetersPerSecond(double measure){
             return measure/INCH_PER_SECOND_MEASURE;
         }
-        public static double MilePerSecondToMetersPerSecond(double measure){
+        public static double milePerSecondToMetersPerSecond(double measure){
             return measure/MILE_PER_SECOND_MEASURE;
         }
-        public static double BeaufortToMetersPerSecond(double measure){
+        public static double beaufortToMetersPerSecond(double measure){
             return measure/BEAUFORT_MEASURE;
         }
 
         //ANGULAR SPEED
         //UNIT OF MEASURE [rad/s]
-        public static double RadiansPerSecondToRPM(double measure){
+        public static double radiansPerSecondToRPM(double measure){
             return measure*RPM_MEASURE;
         }
-        public static double RadiansPerSecondToDegreesPerSecond(double measure){
+        public static double radiansPerSecondToDegreesPerSecond(double measure){
             return measure*DEGREES_PER_SECOND;
         }
-        public static double RadiansPerSecondToHertz(double measure){
+        public static double radiansPerSecondToHertz(double measure){
             return measure*HERTZ_MEASURE;
         }
         public static double RPMToRadiansPerSecond(double measure){
             return measure/RPM_MEASURE;
         }
-        public static double DegreesPerSecondToRadiansPerSecond(double measure){
+        public static double degreesPerSecondToRadiansPerSecond(double measure){
             return measure/DEGREES_PER_SECOND;
         }
-        public static double HertzToRadiansPerSecond(double measure){
+        public static double hertzToRadiansPerSecond(double measure){
             return measure/HERTZ_MEASURE;
         }
 
         //VOLUME
         //UNIT OF MEASURE [m^3]
-        public static double CubicMetersToAcreFoot(double measure){
+        public static double cubicMetersToAcreFoot(double measure){
             return measure*ACRE_FOOT_MEASURE;
         }
-        public static double CubicMetersToAcreInch(double measure){
+        public static double cubicMetersToAcreInch(double measure){
             return measure*ACRE_INCH_MEASURE;
         }
-        public static double CubicMetersToLitre(double measure){
+        public static double cubicMetersToLitre(double measure){
             return measure*LITRE_MEASURE;
         }
-        public static double CubicMetersToImperialGallon(double measure){
+        public static double cubicMetersToImperialGallon(double measure){
             return measure*IMPERIAL_GALLON_MEASURE;
         }
-        public static double CubicMetersToCubicFoot(double measure){
+        public static double cubicMetersToCubicFoot(double measure){
             return measure*CUBIC_FOOT_MEASURE;
         }
-        public static double CubicMetersToCubicInch(double measure){
+        public static double cubicMetersToCubicInch(double measure){
             return measure*CUBIC_INCH_MEASURE;
         }
-        public static double CubicMetersToCubicMile(double measure){
+        public static double cubicMetersToCubicMile(double measure){
             return measure*CUBIC_MILE_MEASURE;
         }
-        public static double AcreFootToCubicMeters(double measure){
+        public static double acreFootToCubicMeters(double measure){
             return measure/ACRE_FOOT_MEASURE;
         }
-        public static double AcreInchToCubicMeters(double measure){
+        public static double acreInchToCubicMeters(double measure){
             return measure/ACRE_INCH_MEASURE;
         }
-        public static double LitreToCubicMeters(double measure){
+        public static double litreToCubicMeters(double measure){
             return measure/LITRE_MEASURE;
         }
-        public static double ImperialGallonToCubicMeters(double measure){
+        public static double imperialGallonToCubicMeters(double measure){
             return measure/IMPERIAL_GALLON_MEASURE;
         }
-        public static double CubicFootToCubicMeters(double measure){
+        public static double cubicFootToCubicMeters(double measure){
             return measure/CUBIC_FOOT_MEASURE;
         }
-        public static double CubicInchToCubicMeters(double measure){
+        public static double cubicInchToCubicMeters(double measure){
             return measure/CUBIC_INCH_MEASURE;
         }
-        public static double CubicMileToCubicMeters(double measure){
+        public static double cubicMileToCubicMeters(double measure){
             return measure/CUBIC_MILE_MEASURE;
         }
 
