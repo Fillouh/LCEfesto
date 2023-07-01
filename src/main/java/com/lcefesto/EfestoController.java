@@ -2,221 +2,202 @@ package com.lcefesto;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
-import io.github.palexdev.materialfx.enums.ButtonType;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 
 import javafx.geometry.VPos;
 import javafx.scene.control.TextField;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.GridPane;
 
-import javafx.scene.paint.Paint;
-
-import java.lang.reflect.InvocationTargetException;
+import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EfestoController {
-    public static final int NUM_COLS = 4;
-    public static final int BUTTON_PREF_WIDTH = 300;
-    public static final int BUTTON_PREF_HEIGHT = 120;
+    public static final int OPS_GRID_COLS = 4;
+    public static final int OPS_GRID_WIDTH = 1430;
+    public static final int OPS_GRID_HEIGHT = 810;
+    public static final String BACKGROUND_COLOR = "-fx-background-color:";
+    public static final int PAGES_GRID_COLS = 1;
+    public static final int PAGES_GRID_WIDTH = 480;
+    public static final int PAGES_GRID_HEIGHT = 640;
+
     public static final String DEEP_BLACK = "#111111";
     public static final String LIGHT_GRAY = "#d3d3d3";
-    public static final String BUTTON_FONT_SIZE = "24";
     public static final String BLACK = "#292929";
-    public static final int BUTTON_HEIGHT = 180;
-    @FXML
-    private MFXButton MathButton;
 
-    private boolean MathSwitch = false;
-    @FXML
-    private MFXButton StatisticsButton;
-    private boolean StatisticsSwitch = false;
-    @FXML
-    private MFXButton ConverterButton;
-    private boolean ConverterSwitch = false;
-    @FXML
-    private MFXButton GraphsButton;
-    private boolean GraphsSwitch = false;
+    public static final String NUM_MATCH_REGEX = "[0-9]{1,13}(\\.[0-9]*)?";
+    public static final String NUM_CORRECT_REGEX = "[^\\d.]";
+
     @FXML
     private MFXScrollPane scrollPane;
     @FXML
+    private AnchorPane anchorPane;
     private GridPane gridPane;
     @FXML
     private TextField inputText;
     @FXML
     private TextField outputText;
+    private ChangeListener changeListener;
 
-    @FXML
     public void initialize() {
-        scrollPane.setOpacity(0);
-        scrollPane.setTrackColor(Paint.valueOf(DEEP_BLACK));
-        scrollPane.setThumbColor(Paint.valueOf(BLACK));
+        List<MFXButton> list = new ArrayList<>();
+        try {
+            List<Class<?>> opClasses = new ArrayList<>(OpsPackage.findAllClassesUsingGoogleGuice("com.lcefesto.ops"));
 
-        inputText.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                inputText.setText(newValue.replaceAll("[^\\d.]", ""));
+            for (Class<?> c : opClasses) {
+                list.add(createPageButton(c));
             }
+
+            GridPane pagesGridPane = createGridPane(PAGES_GRID_WIDTH, PAGES_GRID_HEIGHT, BACKGROUND_COLOR +
+                    "transparent;", getRowsNumber(opClasses.size(), PAGES_GRID_COLS), PAGES_GRID_COLS,
+                    MFXPageButton.PAGE_BUTTON_WIDTH, MFXPageButton.PAGE_BUTTON_HEIGHT + 60);
+            populateGridpane(pagesGridPane, list);
+
+            anchorPane.getChildren().setAll(pagesGridPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setListener(String matchRegex, String correctRegex) {
+
+        this.inputText.setEditable(true);
+
+        if (changeListener != null) {
+            inputText.textProperty().removeListener(changeListener);
+        }
+
+        changeListener = (observable, oldValue, newValue) -> {
+            if (!((String) newValue).matches(matchRegex)) {
+                inputText.setText(((String) newValue).replaceAll(correctRegex, ""));
+            }
+        };
+
+        inputText.textProperty().addListener(changeListener);
+    }
+
+    private MFXPageButton createPageButton(Class<?> c) {
+        MFXPageButton pageButton = new MFXPageButton(c.getSimpleName(), c, NUM_MATCH_REGEX, NUM_CORRECT_REGEX);
+
+        GridPane.setHalignment(pageButton, HPos.CENTER);
+        GridPane.setValignment(pageButton, VPos.CENTER);
+
+        pageButton.setOnAction(event -> {
+            setScrollPane();
+            MFXPageButton mfxPageButton = (MFXPageButton) event.getSource();
+
+            GridPane pane = createGridPane(OPS_GRID_WIDTH, OPS_GRID_HEIGHT, BACKGROUND_COLOR + BLACK + ";",
+                    getRowsNumber(mfxPageButton.getMethodList().size(), OPS_GRID_COLS), OPS_GRID_COLS, MFXOpButton.WIDTH, MFXOpButton.HEIGHT + 60);
+
+            List<MFXButton> buttonList = new ArrayList<>();
+
+            for (Method m : mfxPageButton.getMethodList()) {
+                buttonList.add(new MFXOpButton(m.getName(), m, inputText, outputText));
+            }
+
+            populateGridpane(pane, buttonList);
+
+            setListener(mfxPageButton.getMatchRegex(), mfxPageButton.getCorrectRegex());
+
+            scrollPane.setContent(pane);
         });
+
+        return pageButton;
     }
 
-    @FXML
-    protected void onMathButtonClick() {
-        if (MathSwitch) {
-            this.MathSwitch = false;
-            this.scrollPane.setOpacity(0);
-        } else {
-            this.MathSwitch = true;
-            //allocateButtons();
-        }
-    }
-
-    @FXML
-    protected void onStatButtonClick() {
-
-        if (StatisticsSwitch) {
-            this.StatisticsSwitch = false;
-            this.scrollPane.setOpacity(0);
-        } else {
-            this.StatisticsSwitch = true;
-            //allocateButtons();
-        }
-    }
-
-    @FXML
-    protected void onConvButtonClick() {
-
-        if (ConverterSwitch) {
-            this.ConverterSwitch = false;
-            this.scrollPane.setOpacity(0);
-        } else {
-            this.ConverterSwitch = true;
-            this.allocateButtons(Arrays.stream(Measure.class.getDeclaredMethods()).toList());
-        }
-    }
-
-    @FXML
-    protected void onGraphsButtonClick() {
-
-        if (GraphsSwitch) {
-            this.GraphsSwitch = false;
-            this.scrollPane.setOpacity(0);
-        } else {
-            this.GraphsSwitch = true;
-            //allocateButtons();
-        }
-    }
-
+    /** Simple method to set up the ScrollPane's looks for usage */
     private void setScrollPane() {
-        this.scrollPane.setOpacity(1);
-        this.scrollPane.setStyle("-fx-background-color: transparent");
+        scrollPane.setOpacity(1);
+        scrollPane.setStyle("-fx-background-color: transparent");
     }
 
-    private void setGridPane(final int numRows) {
-        this.gridPane = new GridPane();
-        this.gridPane.setPrefWidth(1430);
-        this.gridPane.setPrefHeight(810);
-        this.gridPane.setStyle("-fx-background-color: " + BLACK);
+    /**
+     * Creates a new GridPane instance with:
+     *
+     * @param width GridPane width in pixels
+     * @param height GridPane height in pixels
+     * @param style GridPane CSS style String
+     * @param numRows number of rows
+     * @param numCols number of columns
+     *
+     * @return a GridPane object
+     */
+    private GridPane createGridPane(final int width, final int height, String style, int numRows, final int numCols, final int colWidth, final int rowHeight) {
 
-        for (int i = 0; i < NUM_COLS; i++) {
+        GridPane pane = new GridPane();
+
+        pane.setPrefWidth(width);
+        pane.setPrefHeight(height);
+        pane.setStyle(style);
+
+        for (int i = 0; i < numCols; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / NUM_COLS);
-            this.gridPane.getColumnConstraints().add(colConst);
+            colConst.setPercentWidth(100.0 / numCols);
+            pane.getColumnConstraints().add(colConst);
         }
 
         for (int i = 0; i < numRows; i++) {
             RowConstraints rowConst = new RowConstraints();
-            rowConst.setMinHeight(BUTTON_HEIGHT);
-            rowConst.setPrefHeight(BUTTON_HEIGHT);
-            rowConst.setMaxHeight(BUTTON_HEIGHT);
-            this.gridPane.getRowConstraints().add(rowConst);
+            rowConst.setMinHeight(rowHeight);
+            rowConst.setPrefHeight(colWidth);
+            pane.getRowConstraints().add(rowConst);
         }
+
+        return pane;
     }
 
-    private int getRowsNumber(List<Method> methodsList) {
-        return (int) Math.ceil((double) methodsList.toArray().length / NUM_COLS);
+    /**
+     * Method returning the number of rows necessary to display n elements.
+     *
+     * @param n number of elements
+     * @param numCols number of columns
+     *
+     * @return number of rows
+     */
+    private int getRowsNumber(final int n, final int numCols) {
+        return (int) Math.ceil((double) n / (double) numCols);
     }
 
-    private MFXButton setMFXButton(Method method) {
-
-        MFXButton button = new MFXButton(methodButtonName(method.getName()));
-
-        button.setButtonType(ButtonType.RAISED);
-        button.setPrefWidth(BUTTON_PREF_WIDTH);
-        button.setPrefHeight(BUTTON_PREF_HEIGHT);
-        button.setStyle("-fx-background-color: " + DEEP_BLACK + "; -fx-background-radius: 20; -fx-text-fill: " + LIGHT_GRAY + "; -fx-alignment: CENTER; -fx-font-size: " + BUTTON_FONT_SIZE);
-
-        button.setOnAction(event -> {
-            try {
-                outputText.setText(method.invoke(null, Double.parseDouble(inputText.getText())).toString());
-            } catch (InvocationTargetException | IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        return button;
+    /**
+     * Checks if passed index doesn't generate an ArrayIndexOutOfBoundsException.
+     *
+     * @param list Generic List
+     * @param index the current index value
+     *
+     * @return false if the index is out of bounds, true otherwise
+     */
+    private boolean isInBounds(List<?> list, int index) {
+        return list.toArray().length > index;
     }
 
-    private boolean isOutOfBounds(List<Method> methodList, int index) {
-        return methodList.toArray().length <= index;
-    }
+    /**
+     * A method that populates and  GridPane with MFXButtons, on the basis of the number of columns.
+     *
+     * @param pane the GridPane instance we want to populate
+     * @param buttons list of MFXButtons that will populate it
+     */
+    private void populateGridpane(GridPane pane, List<MFXButton> buttons) {
 
-    private void allocateButtons(List<Method> methodsList) {
-        this.setScrollPane();
-        final int numRows = getRowsNumber(methodsList);
-        this.setGridPane(numRows);
+        final int numRows = pane.getRowCount();
+        final int numCols = pane.getColumnCount();
 
         for (int row = 0; row < numRows; ++row) {
-            for (int col = 0; col < NUM_COLS && !isOutOfBounds(methodsList, row * NUM_COLS + col); ++col) {
+            for (int col = 0; col < numCols && isInBounds(buttons, row * numCols + col); ++col) {
 
-                MFXButton button = setMFXButton(methodsList.get(row * NUM_COLS + col));
+                MFXButton button = buttons.get(row * numCols + col);
 
                 GridPane.setHalignment(button, HPos.CENTER);
                 GridPane.setValignment(button, VPos.CENTER);
 
-                gridPane.add(button, col, row);
+                pane.add(button, col, row);
             }
         }
-
-        scrollPane.setContent(this.gridPane);
-    }
-
-    /**
-     * Method that, given a camelcase-formatted String, returns a
-     * human-readable version of the String.
-     *
-     * @param methodName name of the method
-     *
-     * @return the human-readable version of the method as String
-     */
-    private static String methodButtonName(String methodName) {
-        StringBuilder buttonName = new StringBuilder();
-
-        /*
-            The new String contains all words of the input String,
-            but all uppercase letters are preceded by a whitespace,
-            and the first letter must be upper case.
-         */
-
-        for (int i = 0; i < methodName.length(); ++i) {
-
-            Character c = methodName.charAt(i);
-
-            if (Character.isUpperCase(c) && (i + 1 < methodName.length() && i > 0)) {
-                if (Character.isLowerCase(methodName.charAt(i + 1)) || !Character.isUpperCase(methodName.charAt(i - 1))) {
-                    buttonName.append(" ");
-                }
-            } else if (i == 0 && Character.isLowerCase(c)) {
-                c = Character.toUpperCase(c);
-            }
-
-            buttonName.append(c);
-        }
-
-        return buttonName.toString();
     }
 }

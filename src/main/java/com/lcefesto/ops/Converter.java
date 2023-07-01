@@ -1,6 +1,6 @@
-package com.lcefesto;
+package com.lcefesto.ops;
 import java.lang.Math;
-public class Measure {
+public class Converter {
         //MEASURE CONSTANTS
         public static final double QUETTA=1000000000000000000000000000000.0;
         public static final double RONNA=1000000000000000000000000000.0;
