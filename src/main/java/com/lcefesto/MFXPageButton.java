@@ -2,15 +2,17 @@ package com.lcefesto;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.enums.ButtonType;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.util.StringConverter;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static io.github.palexdev.materialfx.enums.ButtonType.RAISED;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 public class MFXPageButton extends MFXButton {
     public static final int PAGE_BUTTON_WIDTH = 320;
@@ -21,6 +23,53 @@ public class MFXPageButton extends MFXButton {
     private String matchRegex;
     private String correctRegex;
 
+    private TextFormatter textFormatter;
+
+    public MFXPageButton(String text, Class opClass, String regex) {
+        super(text, PAGE_BUTTON_WIDTH, PAGE_BUTTON_HEIGHT);
+        this.setMethodList(opClass);
+        this.setMatchRegex(matchRegex);
+        this.setCorrectRegex(correctRegex);
+        this.setupLooks();
+        setTextFormatter(regex);
+    }
+
+    private void setTextFormatter(String regex){
+
+        Pattern validEditingState = Pattern.compile(regex);
+
+        UnaryOperator<TextFormatter.Change> filter = c -> {
+            String text = c.getControlNewText();
+            if (validEditingState.matcher(text).matches()) {
+                return c;
+            } else {
+                return null;
+            }
+        };
+
+        StringConverter<Double> converter = new StringConverter<Double>() {
+
+            @Override
+            public Double fromString(String s) {
+                if (s.isEmpty() || "-".equals(s) || ".".equals(s) || "-.".equals(s)) {
+                    return 0.0;
+                } else {
+                    return Double.valueOf(s);
+                }
+            }
+
+            @Override
+            public String toString(Double d) {
+                return d.toString();
+            }
+        };
+
+        textFormatter = new TextFormatter<>(converter, 0.0, filter);
+    }
+
+    public TextFormatter getTextFormatter() {
+        return textFormatter;
+    }
     private void setupLooks() {
         this.setButtonType(ButtonType.RAISED);
         this.setRippleAnimateShadow(true);
@@ -29,14 +78,6 @@ public class MFXPageButton extends MFXButton {
         this.setRippleRadius(5.0);
         this.setFont(Font.font("Arial", 24));
         this.setStyle(PAGE_BUTTON_STYLE);
-    }
-
-    public MFXPageButton(String text, Class opClass, String matchRegex, String correctRegex) {
-        super(text, PAGE_BUTTON_WIDTH, PAGE_BUTTON_HEIGHT);
-        this.setMethodList(opClass);
-        this.setMatchRegex(matchRegex);
-        this.setCorrectRegex(correctRegex);
-        this.setupLooks();
     }
 
     public void setMethodList(Class opClass) {
@@ -64,4 +105,6 @@ public class MFXPageButton extends MFXButton {
     public void setCorrectRegex(String correctRegex) {
         this.correctRegex = correctRegex;
     }
+
+
 }

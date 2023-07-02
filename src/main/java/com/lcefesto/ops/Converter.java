@@ -1,6 +1,7 @@
 package com.lcefesto.ops;
 import java.lang.Math;
 public class Converter {
+        public static final String REGEX = "-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?";
         //MEASURE CONSTANTS
         public static final double QUETTA=1000000000000000000000000000000.0;
         public static final double RONNA=1000000000000000000000000000.0;

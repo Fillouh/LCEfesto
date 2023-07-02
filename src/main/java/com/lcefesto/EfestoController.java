@@ -3,21 +3,27 @@ package com.lcefesto;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 
 import javafx.geometry.VPos;
 import javafx.scene.control.TextField;
 
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 public class EfestoController {
     public static final int OPS_GRID_COLS = 4;
@@ -32,9 +38,6 @@ public class EfestoController {
     public static final String LIGHT_GRAY = "#d3d3d3";
     public static final String BLACK = "#292929";
 
-    public static final String NUM_MATCH_REGEX = "[0-9]{1,13}(\\.[0-9]*)?";
-    public static final String NUM_CORRECT_REGEX = "[^\\d.]";
-
     @FXML
     private MFXScrollPane scrollPane;
     @FXML
@@ -44,7 +47,6 @@ public class EfestoController {
     private TextField inputText;
     @FXML
     private TextField outputText;
-    private ChangeListener changeListener;
 
     public void initialize() {
         List<MFXButton> list = new ArrayList<>();
@@ -55,9 +57,7 @@ public class EfestoController {
                 list.add(createPageButton(c));
             }
 
-            GridPane pagesGridPane = createGridPane(PAGES_GRID_WIDTH, PAGES_GRID_HEIGHT, BACKGROUND_COLOR +
-                    "transparent;", getRowsNumber(opClasses.size(), PAGES_GRID_COLS), PAGES_GRID_COLS,
-                    MFXPageButton.PAGE_BUTTON_WIDTH, MFXPageButton.PAGE_BUTTON_HEIGHT + 60);
+            GridPane pagesGridPane = createGridPane(PAGES_GRID_WIDTH, PAGES_GRID_HEIGHT, BACKGROUND_COLOR + "transparent;", getRowsNumber(opClasses.size(), PAGES_GRID_COLS), PAGES_GRID_COLS, MFXPageButton.PAGE_BUTTON_WIDTH, MFXPageButton.PAGE_BUTTON_HEIGHT + 60);
             populateGridpane(pagesGridPane, list);
 
             anchorPane.getChildren().setAll(pagesGridPane);
@@ -66,50 +66,66 @@ public class EfestoController {
         }
     }
 
-    private void setListener(String matchRegex, String correctRegex) {
+    private void setListener(MFXPageButton button) {
 
         this.inputText.setEditable(true);
 
-        if (changeListener != null) {
+        inputText.setTextFormatter(button.getTextFormatter());
+
+        /*if (changeListener != null) {
             inputText.textProperty().removeListener(changeListener);
         }
 
         changeListener = (observable, oldValue, newValue) -> {
+            try
+            {
+                Double.parseDouble((String) newValue);
+            }
+            catch(NumberFormatException e)
+            {
+                inputText.setText(((String) newValue).replaceAll(correctRegex, ""));
+            }
             if (!((String) newValue).matches(matchRegex)) {
                 inputText.setText(((String) newValue).replaceAll(correctRegex, ""));
             }
         };
 
         inputText.textProperty().addListener(changeListener);
+
+         */
     }
 
     private MFXPageButton createPageButton(Class<?> c) {
-        MFXPageButton pageButton = new MFXPageButton(c.getSimpleName(), c, NUM_MATCH_REGEX, NUM_CORRECT_REGEX);
+        try {
+            MFXPageButton pageButton = new MFXPageButton(c.getSimpleName(), c, (String) c.getField("REGEX").get(null));
 
-        GridPane.setHalignment(pageButton, HPos.CENTER);
-        GridPane.setValignment(pageButton, VPos.CENTER);
+            GridPane.setHalignment(pageButton, HPos.CENTER);
+            GridPane.setValignment(pageButton, VPos.CENTER);
 
-        pageButton.setOnAction(event -> {
-            setScrollPane();
-            MFXPageButton mfxPageButton = (MFXPageButton) event.getSource();
+            pageButton.setOnAction(event -> {
+                setScrollPane();
 
-            GridPane pane = createGridPane(OPS_GRID_WIDTH, OPS_GRID_HEIGHT, BACKGROUND_COLOR + BLACK + ";",
-                    getRowsNumber(mfxPageButton.getMethodList().size(), OPS_GRID_COLS), OPS_GRID_COLS, MFXOpButton.WIDTH, MFXOpButton.HEIGHT + 60);
+                MFXPageButton mfxPageButton = (MFXPageButton) event.getSource();
 
-            List<MFXButton> buttonList = new ArrayList<>();
+                GridPane pane = createGridPane(OPS_GRID_WIDTH, OPS_GRID_HEIGHT, BACKGROUND_COLOR + BLACK + ";", getRowsNumber(mfxPageButton.getMethodList().size(), OPS_GRID_COLS), OPS_GRID_COLS, MFXOpButton.WIDTH, MFXOpButton.HEIGHT + 60);
 
-            for (Method m : mfxPageButton.getMethodList()) {
-                buttonList.add(new MFXOpButton(m.getName(), m, inputText, outputText));
-            }
+                List<MFXButton> buttonList = new ArrayList<>();
 
-            populateGridpane(pane, buttonList);
+                for (Method m : mfxPageButton.getMethodList()) {
+                    buttonList.add(new MFXOpButton(m.getName(), m, inputText, outputText));
+                }
 
-            setListener(mfxPageButton.getMatchRegex(), mfxPageButton.getCorrectRegex());
+                populateGridpane(pane, buttonList);
 
-            scrollPane.setContent(pane);
-        });
+                setListener(mfxPageButton);
 
-        return pageButton;
+                scrollPane.setContent(pane);
+            });
+
+            return pageButton;
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /** Simple method to set up the ScrollPane's looks for usage */
