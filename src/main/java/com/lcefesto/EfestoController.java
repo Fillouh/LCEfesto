@@ -27,11 +27,9 @@ public class EfestoController {
     public static final int PAGES_GRID_COLS = 1;
     public static final int PAGES_GRID_WIDTH = 480;
     public static final int PAGES_GRID_HEIGHT = 640;
-
     public static final String DEEP_BLACK = "#111111";
     public static final String LIGHT_GRAY = "#d3d3d3";
     public static final String BLACK = "#292929";
-
     @FXML
     private MFXScrollPane scrollPane;
     @FXML
@@ -65,7 +63,7 @@ public class EfestoController {
      * to the String representation of 0.0d.
      */
     public void onClearButtonClick(){
-        inputText.setText(Double.toString(0.0));
+        inputText.setText("");
     }
 
     /** Sets the current inputText TextField text as the outputText text.
