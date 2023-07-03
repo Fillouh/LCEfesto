@@ -1,18 +1,19 @@
-package com.lcefesto.lcefesto;
+package com.lcefesto;
 
-import com.lcefesto.ops.Converter;
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Application extends javafx.application.Application {
+public class EfestoApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(EfestoApplication.class.getResource("efesto.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Efesto");
+        stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
     }

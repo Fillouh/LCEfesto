@@ -20,16 +20,16 @@ public class MFXOpButton extends MFXButton {
      * to the input value, parsed from the inputText TextField and (2) displays the result on the outputText TextField.
      *
      * @param method method of a class
-     *
-     * @return a MFXButton
      */
-
-    public MFXOpButton(String methodName, Method method, TextField inputText, TextField outputText) {
-        super(getNameFromMethod(methodName), WIDTH, HEIGHT);
+    public MFXOpButton(Method method, TextField inputText, TextField outputText) {
+        super(getNameFromMethod(method.getName()), WIDTH, HEIGHT);
         setupLooks();
         setOnActionMethod(method, inputText, outputText);
     }
 
+    /**
+     *
+     * */
     private void setOnActionMethod(Method method, TextField inputText, TextField outputText) {
         this.setOnAction(event -> {
             try {
