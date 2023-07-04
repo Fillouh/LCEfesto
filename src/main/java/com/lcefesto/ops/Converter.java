@@ -34,16 +34,9 @@ public class Converter {
 
         //ACCELERATION CONSTANTS
         public static final double GRAVITY_ACC_MEASURE=0.10197162129779;
-        public static final double PLANCK_ACC_MEASURE=1.7985611510791*Math.pow(10.0,-52.0);
         public static final double FOOT_PER_HOUR_PER_SECONDS_MEASURE=1.181102*Math.pow(10.0,4.0);
-        public static final double FOOT_PER_MINUTE_PER_SECONDS_MEASURE=196.85039370079;
-        public static final double GAL_MEASURE=100;
         public static final double INCH_PER_MINUTE_PER_SECONDS=2362.2049104098;
-        public static final double INCH_PER_SECONDS_SQUARED_MEASURE=39.370078740157;
-        public static final double KNOT_PER_SECONDS_MEASURE=1.9438446603753;
         public static final double MILE_PER_HOURS_MEASURE=2.237;
-        public static final double MILE_PER_MINUTE_PER_SECONDS_MEASURE=0.037282;
-        public static final double MILE_PER_SECONDS_SQUARED_MEASURE=0.000621371;
 
         //ANGOLAR ACCELERATION CONSTANTS
         public static final double RADIANT_SECONDS_SQUARED_MEASURE=0.017453;
@@ -51,77 +44,33 @@ public class Converter {
         //ANGLE CONSTANTS
         public static final double RADIANT_MEASURE=0.017453;
         public static final double GON_MEASURE=1.111;//grado centesimale
-        public static final double MINUTE_OF_ARC_MEASURE=60;
         public static final double SECONDS_OF_ARC_MEASURE=3600;
 
         //BIT & BYTE CONSTANTS
         public static final double BYTE_MEASURE=0.125;
 
         //DENSITY CONSTANTS
-        public static final double PLANCK_DENSITY_MEASURE=2.0*Math.pow(10.0,-97.0);
         public static final double OUNCE_PER_CUBIC_FOOT_MEASURE=0.9988;
         public static final double OUNCE_PER_CUBIC_INCH_MEASURE=0.00057804;
-        public static final double OUNCE_PER_GALLON_MEASURE=0.1335;
         public static final double POUND_PER_CUBIC_FOOT_MEASURE=0.0624;
         public static final double POUND_PER_CUBIC_INCH_MEASURE=3.613 *Math.pow(10.0,-5.0);
-        public static final double POUND_PER_GALLON_MEASURE=0.008345;
-        public static final double SLUG_PER_CUBIC_FOOT_MEASURE= 0.001940;
 
         //ENERGY CONSTANTS
         public static final double BRITISH_THERMAL_UNIT_MEASURE=0.00094782;
         public static final double CALORIES_MEASURE=0.238845;
         public static final double ELETTRONVOLT_MEASURE= 6.241506363094*Math.pow(10.0,18.0);
-        public static final double PLANCK_ENERGY_MEASURE=5.1124744376278*Math.pow(10.0,-10.0);
-        public static final double ERG_MEASURE=Math.pow(10.0,7.0);
         public static final double FOOT_POUND_FORCE_MEASURE=0.737562;
-        public static final double FOOT_POUNDAL_MEASURE=23.730360;
-        public static final double HARTREE_MEASURE=2.2937126583579*Math.pow(10.0,17.0);
         public static final double HORSEPOWER_PER_HOUR_MEASURE=3.7243947858473*Math.pow(10.0,-7.0);
         public static final double INCH_POUND_FORCE_MEASURE=8.850745;
-        public static final double LITRE_ATMOSPHERE_MEASURE=0.000869;
-        public static final double QUAD_MEASURE=9.4781712031332*Math.pow(10.0,-19.0);
-        public static final double RYDBERG_MEASURE=4.5874253167158*Math.pow(10.0,17.0);
-        public static final double THERM_MEASURE=9.4781712031332*Math.pow(10.0,-9.0);
         public static final double WATT_HOUR_MEASURE=0.000277777;
-
-        //MOLAR ENERGY CONSTANTS
-        public static final double KILOCAL_MOLE_MEASURE=0.000238845;
-
-        //LUMINOUS FLUX
-        public static final double SPHERICAL_CANDLE_POWER_MEASURE=0.079579818;
-        public static final double WATT_LED_LAMP_MEASURE=0.005555;
-        public static final double WATT_LAMP_POWER=0.1;
-
-        //MAGNETIC FLUX CONSTANTS
-        public static final double PLANCK_MAGNETIC_FLOW_MEASURE=1.7785049887065*Math.pow(10.0,16.0);
 
         //FORCE CONSTANTS
         public static final double NEWTON_MEASURE=9.80665002864;
         public static final double KILOGRAM_FORCE_MEASURE=0.101972;
         public static final double ATOMIC_UNIT_OF_FORCE_MEASURE=1.21378*Math.pow(10.0,7.0);
-        public static final double DYN_MEASURE=100000;
-        public static final double PLANCK_FORCE_MEASURE=8.264*Math.pow(10.0,-45.0);
         public static final double OUNCE_FORCE_MEASURE=3.596943;
         public static final double POUND_FORCE_MEASURE=0.224808;
-        public static final double POUNDAL_MEASURE=7.233013;
-        public static final double STHENE_MEASURE=0.001;
         public static final double TON_FORCE_MEASURE=0.000112404;
-
-        //FREQUENCE CONSTANTS
-        public static final double PLANCK_FREQUENCE_MEASURE=3.3874203875758*Math.pow(10.0,-43.0);
-
-        //ILLUMINANCE CONSTANTS
-        public static final double FOOT_CANDLE_MEASURE=0.092903;
-        public static final double NOX_MEASURE=1000;
-        public static final double PHOT_MEASURE=0.0001;
-
-        //LIGHT INTENSITY
-        public static final double BERLINER_LICHTEINHEIT_MEASURE=0.900900;
-        public static final double CANDLE_POWER_MEASURE=1.019367;
-        public static final double HEFNERKERZE_MEASURE=1.107419;
-
-        //LEVEL CONSTANTS
-        public static final double NEPER_MEASURE=0.115129;
 
         //LENGHT CONSTANTS
         public static final double MILE_MEASURE=0.000621371;
@@ -139,14 +88,10 @@ public class Converter {
         public static final double POUND_MEASURE=2.20462;
         public static final double OUNCE_MEASURE=35.274;
 
-        //ANGULAR MOMENT CONSTANTS
-        public static final double PLANCK_CONSTANT_MEASURE=1.5091901796422*Math.pow(10.0,33.0);
-
         //POWER CONSTANTS
         public static final double MECHANICAL_HORSE_POWER_MEASURE=0.001341;
         public static final double BTU_SECOND_MEASURE=0.000947817;
         public static final double CALORIES_SECOND_MEASURE=0.238845;
-        public static final double PLANCK_LEISTUNG_POWER_MEASURE=2.7563395810364*Math.pow(10.0,-53.0);
 
         //PRESSURE CONSTANTS
         public static final double ATMOSPHERE_MEASURE=9.869*Math.pow(10.0,-6.0);
@@ -156,7 +101,6 @@ public class Converter {
         public static final double TORR_MEASURE= 0.007501;
 
         //SURFACE CONSTANTS
-        public static final double ACRE_MEASURE=0.000247105;
         public static final double CIRCULAR_INCH_MEASURE=1973.525;
         public static final double SQUARED_FOOT_MEASURE=10.763910;
         public static final double SQUARED_INCH_MEASURE=1550;
@@ -180,7 +124,6 @@ public class Converter {
         public static final double FEET_PER_SECOND_MEASURE=3.280839;
         public static final double INCH_PER_SECOND_MEASURE= 39.370078;
         public static final double MILE_PER_SECOND_MEASURE=0.000621371;
-        public static final double BEAUFORT_MEASURE=1.126840;
 
         //ANGULAR SPEED CONSTANTS
         public static final double RPM_MEASURE=9.549296;
@@ -188,10 +131,7 @@ public class Converter {
         public static final double HERTZ_MEASURE=0.159154;
 
         //VOLUME CONSTANTS
-        public static final double ACRE_FOOT_MEASURE=0.000810713;
-        public static final double ACRE_INCH_MEASURE=0.009728558;
         public static final double LITRE_MEASURE=1000;
-        public static final double IMPERIAL_GALLON_MEASURE=219.969248;
         public static final double CUBIC_FOOT_MEASURE=35.314666;
         public static final double CUBIC_INCH_MEASURE= 6.102374*Math.pow(10.0,4.0);
         public static final double CUBIC_MILE_MEASURE=2.3991275857893*Math.pow(10.0,-10.0);
@@ -276,50 +216,26 @@ public class Converter {
         public static double accMetersToGravityAcc(double measure){
             return measure*GRAVITY_ACC_MEASURE;
         }
-        public static double accMetersToPlanckAcc(double measure){
-            return measure * PLANCK_ACC_MEASURE;
-        }
         public static double accMetersToFPHS(double measure){
             return measure*FOOT_PER_HOUR_PER_SECONDS_MEASURE;
-        }
-        public static double accMetersToFPMS(double measure){
-            return measure*FOOT_PER_MINUTE_PER_SECONDS_MEASURE;
         }
         public static double accMetersToIPMS(double measure){
             return measure*INCH_PER_MINUTE_PER_SECONDS;
         }
-        public static double accMetersToKnotSeconds(double measure){
-            return measure*KNOT_PER_SECONDS_MEASURE;
-        }
         public static double accMetersToMilePerHour(double measure){
             return measure*MILE_PER_HOURS_MEASURE;
-        }
-        public static double accMetersToMPMS(double measure){
-            return measure*MILE_PER_MINUTE_PER_SECONDS_MEASURE;
         }
         public static double gravityAccToAccMeters(double measure){
             return measure/GRAVITY_ACC_MEASURE;
         }
-        public static double planckAccToAccMeters(double measure){
-            return measure/PLANCK_ACC_MEASURE;
-        }
         public static double FPHSToAccMeters(double measure){
             return measure/FOOT_PER_HOUR_PER_SECONDS_MEASURE;
-        }
-        public static double FPMSToAccMeters(double measure){
-            return measure/FOOT_PER_MINUTE_PER_SECONDS_MEASURE;
         }
         public static double IPMSToAccMeters(double measure){
             return measure/INCH_PER_MINUTE_PER_SECONDS;
         }
-        public static double knotSecondsToAccMeters(double measure){
-            return measure/KNOT_PER_SECONDS_MEASURE;
-        }
         public static double milePerHourToAccMeters(double measure){
             return measure/MILE_PER_HOURS_MEASURE;
-        }
-        public static double MPMSToAccMeters(double measure){
-            return measure/MILE_PER_MINUTE_PER_SECONDS_MEASURE;
         }
 
         //ANGULAR ACCELERATION
@@ -398,9 +314,6 @@ public class Converter {
         public static double jouleToElettronVolt(double measure){
             return measure*ELETTRONVOLT_MEASURE;
         }
-        public static double jouleToPlanckEnergy(double measure){
-            return measure*PLANCK_ENERGY_MEASURE;
-        }
         public static double jouleToFootPoundForce(double measure){
             return measure*FOOT_POUND_FORCE_MEASURE;
         }
@@ -421,9 +334,6 @@ public class Converter {
         }
         public static double elettronVoltToJoule(double measure){
             return measure/ELETTRONVOLT_MEASURE;
-        }
-        public static double planckEnergyToJoule(double measure){
-            return measure/PLANCK_ENERGY_MEASURE;
         }
         public static double footPoundForceToJoule(double measure){
             return measure/FOOT_POUND_FORCE_MEASURE;
@@ -449,9 +359,6 @@ public class Converter {
         public static double newtonToAtomicUnitOfForce(double measure){
             return measure*ATOMIC_UNIT_OF_FORCE_MEASURE;
         }
-        public static double newtonToPlanckForce(double measure){
-            return measure*PLANCK_FORCE_MEASURE;
-        }
         public static double newtonToOunceForce(double measure){
             return measure*OUNCE_FORCE_MEASURE;
         }
@@ -466,9 +373,6 @@ public class Converter {
         }
         public static double atomicUnitOfForceToNewton(double measure){
             return measure/ATOMIC_UNIT_OF_FORCE_MEASURE;
-        }
-        public static double planckForceToNewton(double measure){
-            return measure/PLANCK_FORCE_MEASURE;
         }
         public static double ounceForceToNewton(double measure){
             return measure/OUNCE_FORCE_MEASURE;
