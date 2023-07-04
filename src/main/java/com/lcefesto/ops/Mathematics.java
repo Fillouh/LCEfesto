@@ -1,6 +1,9 @@
 package com.lcefesto.ops;
 
+import java.awt.*;
+import java.util.Arrays;
 import java.util.Vector;
+import org.apache.commons.math3.primes.Primes;
 
 public class Mathematics {
 //MATHEMATICS METHOD
@@ -158,4 +161,20 @@ public class Mathematics {
     public static double mcm(double n1,double n2){
         return (n1*n2)/MCD(n1,n2);
     }
+    public static boolean isPythagoreanTriple(double[] arr){
+        if(arr==null){
+            return false;
+        }
+        Arrays.sort(arr);
+        return (Math.pow(arr[0],2)+Math.pow(arr[1],2))==Math.pow(arr[2],2);
+    }
+
+    public static boolean isPrime(int n){
+        return Primes.isPrime((n));
+    }
+
+    public static double pointDistance(Point p1, Point p2){
+        return Point.distance(p1.getX(),p1.getY(),p2.getX(),p2.getY());
+    }
+
 }
