@@ -60,7 +60,7 @@
                   <Point3D />
                </rotationAxis>
                <children>
-                  <MFXButton layoutX="1212.0" layoutY="91.0" lineSpacing="1.0E-5" onAction="#onClearButtonClick" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="Clear" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                  <MFXButton layoutX="1212.0" layoutY="150.0" lineSpacing="1.0E-5" onAction="#onClearButtonClick" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="Clear" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                      <font>
                         <Font size="34.0" />
                      </font>
@@ -95,9 +95,21 @@
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <MFXButton layoutX="1212.0" layoutY="199.0" lineSpacing="1.0E-5" onAction="#onAnsButtonClick" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="ANS" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                  <MFXButton layoutX="1212.0" layoutY="250.0" lineSpacing="1.0E-5" onAction="#onAnsButtonClick" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="ANS" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                      <font>
                         <Font size="34.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="10.74" offsetY="2.0" radius="2.305" width="0.48">
+                           <color>
+                              <Color red="0.21052631735801697" green="0.20701754093170166" blue="0.19298245012760162" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </MFXButton>
+                  <MFXButton layoutX="1212.0" layoutY="50.0" lineSpacing="1.0E-5" onAction="#onEqualsButtonClick" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="=" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="34.0" />
                      </font>
                      <effect>
                         <DropShadow height="10.74" offsetY="2.0" radius="2.305" width="0.48">

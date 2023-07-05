@@ -7,6 +7,7 @@ import javafx.geometry.HPos;
 
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 import javafx.scene.layout.AnchorPane;
@@ -15,9 +16,11 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EfestoController {
     public static final int OPS_GRID_COLS = 4;
@@ -35,21 +38,17 @@ public class EfestoController {
     @FXML
     private AnchorPane anchorPane;
     @FXML
-    private TextField inputText;
+    public TextField inputText;
     @FXML
-    private TextField outputText;
+    public TextField outputText;
+
+    public Method currentMethod;
 
     public void initialize() {
-        List<MFXButton> list = new ArrayList<>();
 
         try {
-            List<Class<?>> opClasses = new ArrayList<>(OpsPackage.findAllClassesUsingGoogleGuice("com.lcefesto.ops"));
-
-            for (Class<?> c : opClasses) {
-                list.add(createPageButton(c));
-            }
-
-            GridPane pagesGridPane = createGridPane(PAGES_GRID_WIDTH, PAGES_GRID_HEIGHT, BACKGROUND_COLOR + "transparent;", getRowsNumber(opClasses.size(), PAGES_GRID_COLS), PAGES_GRID_COLS, MFXPageButton.PAGE_BUTTON_HEIGHT + 60);
+            List<Node> list = OpsPackage.findAllClassesUsingGoogleGuice("com.lcefesto.ops").stream().map(this::createPageButton).collect(Collectors.toList());
+            GridPane pagesGridPane = createGridPane(PAGES_GRID_WIDTH, PAGES_GRID_HEIGHT, BACKGROUND_COLOR + "transparent;", getRowsNumber(list.size(), PAGES_GRID_COLS), PAGES_GRID_COLS, MFXPageButton.PAGE_BUTTON_HEIGHT + 60);
             populateGridpane(pagesGridPane, list);
 
             pagesGridPane.setAlignment(Pos.TOP_LEFT);
@@ -59,27 +58,28 @@ public class EfestoController {
         }
     }
 
-    /** Sets the current inputText TextField text property
+    public void onEqualsButtonClick() throws InvocationTargetException, IllegalAccessException {
+        if(currentMethod.getParameters()[0].getParameterizedType() == double.class) {
+            outputText.setText(currentMethod.invoke(null, Double.parseDouble(inputText.getText())).toString());
+        }else if (currentMethod.getParameters()[0].getParameterizedType() == int.class){
+            outputText.setText(currentMethod.invoke(null, Integer.parseInt(inputText.getText())).toString());
+        }
+
+    }
+
+    /**
+     * Sets the current inputText TextField text property
      * to the String representation of 0.0d.
      */
-    public void onClearButtonClick(){
+    public void onClearButtonClick() {
         inputText.setText("");
     }
 
-    /** Sets the current inputText TextField text as the outputText text.
-     * */
-    public void onAnsButtonClick(){
+    /**
+     * Sets the current inputText TextField text as the outputText text.
+     */
+    public void onAnsButtonClick() {
         inputText.setText(outputText.getText());
-    }
-
-    /** Sets the current listener of the inputText TextField depending
-    *   on which pageButton was pressed.
-     *
-     * @param button the pressed pageButton
-    * */
-    private void setListener(MFXPageButton button) {
-        inputText.setEditable(true);
-        inputText.setTextFormatter(button.getTextFormatter());
     }
 
     /**
@@ -103,15 +103,10 @@ public class EfestoController {
 
             GridPane pane = createGridPane(OPS_GRID_WIDTH, OPS_GRID_HEIGHT, BACKGROUND_COLOR + BLACK + ";", getRowsNumber(mfxPageButton.getMethodList().size(), OPS_GRID_COLS), OPS_GRID_COLS, MFXOpButton.HEIGHT + 60);
 
-            List<MFXButton> buttonList = new ArrayList<>();
-
-            for (Method m : mfxPageButton.getMethodList()) {
-                buttonList.add(new MFXOpButton(m, inputText, outputText));
-            }
+            List<Node> buttonList =
+                    mfxPageButton.getMethodList().stream().map(m -> new MFXOpButton(this, m)).collect(Collectors.toList());
 
             populateGridpane(pane, buttonList);
-
-            setListener(mfxPageButton);
 
             scrollPane.setContent(pane);
         });
@@ -119,8 +114,9 @@ public class EfestoController {
         return pageButton;
     }
 
-    /** Simple method to set up the ScrollPane's looks for usage.
-     * */
+    /**
+     * Simple method to set up the ScrollPane's looks for usage.
+     */
     private void showScrollPane() {
         scrollPane.setOpacity(1);
         scrollPane.setStyle("-fx-background-color: transparent");
@@ -137,7 +133,7 @@ public class EfestoController {
      *
      * @return a GridPane object
      */
-    private GridPane createGridPane(final int width, final int height, String style, int numRows, final int numCols, final int rowHeight) {
+    public static GridPane createGridPane(final int width, final int height, String style, int numRows, final int numCols, final int rowHeight) {
 
         GridPane pane = new GridPane();
 
@@ -170,7 +166,7 @@ public class EfestoController {
      *
      * @return number of rows
      */
-    private int getRowsNumber(final int n, final int numCols) {
+    public static int getRowsNumber(final int n, final int numCols) {
         return (int) Math.ceil((double) n / (double) numCols);
     }
 
@@ -182,7 +178,7 @@ public class EfestoController {
      *
      * @return false if the index is out of bounds, true otherwise
      */
-    private boolean isInBounds(List<?> list, int index) {
+    public static boolean isInBounds(List<?> list, int index) {
         return list.toArray().length > index;
     }
 
@@ -192,7 +188,7 @@ public class EfestoController {
      * @param pane the GridPane instance we want to populate
      * @param buttons list of MFXButtons that will populate it
      */
-    private void populateGridpane(GridPane pane, List<MFXButton> buttons) {
+    public static void populateGridpane(GridPane pane, List<Node> buttons) {
 
         final int numRows = pane.getRowCount();
         final int numCols = pane.getColumnCount();
@@ -200,7 +196,7 @@ public class EfestoController {
         for (int row = 0; row < numRows; ++row) {
             for (int col = 0; col < numCols && isInBounds(buttons, row * numCols + col); ++col) {
 
-                MFXButton button = buttons.get(row * numCols + col);
+                Node button = buttons.get(row * numCols + col);
 
                 GridPane.setHalignment(button, HPos.CENTER);
                 GridPane.setValignment(button, VPos.CENTER);
