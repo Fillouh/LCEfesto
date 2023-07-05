@@ -22,7 +22,7 @@
          <children>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="480.0">
                <children>
-                  <ImageView fitHeight="257.0" fitWidth="257.0" layoutX="108.0" layoutY="62.0">
+                  <ImageView fitHeight="257.0" fitWidth="257.0" layoutX="112.0" layoutY="72.0">
                      <image>
                         <Image url="@efesto.png" />
                      </image>
