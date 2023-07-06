@@ -1,6 +1,7 @@
 package com.lcefesto;
 
-import io.github.palexdev.materialfx.controls.MFXButton;
+import com.lcefesto.customNodes.MFXOpButton;
+import com.lcefesto.customNodes.MFXPageButton;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -17,8 +18,6 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +41,7 @@ public class EfestoController {
     @FXML
     public TextField outputText;
 
-    public Method currentMethod;
+    public MFXOpButton currentButton;
 
     public void initialize() {
 
@@ -50,7 +49,6 @@ public class EfestoController {
             List<Node> list = OpsPackage.findAllClassesUsingGoogleGuice("com.lcefesto.ops").stream().map(this::createPageButton).collect(Collectors.toList());
             GridPane pagesGridPane = createGridPane(PAGES_GRID_WIDTH, PAGES_GRID_HEIGHT, BACKGROUND_COLOR + "transparent;", getRowsNumber(list.size(), PAGES_GRID_COLS), PAGES_GRID_COLS, MFXPageButton.PAGE_BUTTON_HEIGHT + 60);
             populateGridpane(pagesGridPane, list);
-
             pagesGridPane.setAlignment(Pos.TOP_LEFT);
             anchorPane.getChildren().setAll(pagesGridPane);
         } catch (IOException e) {
@@ -59,12 +57,15 @@ public class EfestoController {
     }
 
     public void onEqualsButtonClick() throws InvocationTargetException, IllegalAccessException {
-        if(currentMethod.getParameters()[0].getParameterizedType() == double.class) {
-            outputText.setText(currentMethod.invoke(null, Double.parseDouble(inputText.getText())).toString());
-        }else if (currentMethod.getParameters()[0].getParameterizedType() == int.class){
-            outputText.setText(currentMethod.invoke(null, Integer.parseInt(inputText.getText())).toString());
+        if(currentButton.isSingleParameter()){
+            if(currentButton.getMethod().getParameters()[0].getParameterizedType() == double.class) {
+                outputText.setText(currentButton.getMethod().invoke(null, Double.parseDouble(inputText.getText())).toString());
+            }else if (currentButton.getMethod().getParameters()[0].getParameterizedType() == int.class){
+                outputText.setText(currentButton.getMethod().invoke(null, Integer.parseInt(inputText.getText())).toString());
+            }
+        }else{
+            outputText.setText(currentButton.getMethod().invoke(null, currentButton.getArgs()).toString());
         }
-
     }
 
     /**
@@ -188,7 +189,7 @@ public class EfestoController {
      * @param pane the GridPane instance we want to populate
      * @param buttons list of MFXButtons that will populate it
      */
-    public static void populateGridpane(GridPane pane, List<Node> buttons) {
+    public static void populateGridpane(GridPane pane, List<? extends Node> buttons) {
 
         final int numRows = pane.getRowCount();
         final int numCols = pane.getColumnCount();

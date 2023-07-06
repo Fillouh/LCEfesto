@@ -1,12 +1,12 @@
-package com.lcefesto;
+package com.lcefesto.customNodes;
 
+import com.lcefesto.EfestoController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.enums.ButtonType;
-import javafx.scene.control.TextField;
+
 import javafx.scene.control.TextFormatter;
 import javafx.util.StringConverter;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.function.UnaryOperator;
@@ -20,8 +20,11 @@ public class MFXOpButton extends MFXButton {
     public static final int HEIGHT = 120;
     public static final String FONT_SIZE = "18";
 
-    private TextFormatter<?> textFormatter;
+    private final TextFormatter<?> textFormatter;
     public boolean singleParameter;
+    private final Method method;
+    private MFXParamDialog paramDialog;
+    private Object[] args;
 
     /**
      * Given a Method, creates an MFXButton with its OnAction option set as an EventHandler that (1) applies the method
@@ -31,38 +34,51 @@ public class MFXOpButton extends MFXButton {
      */
     public MFXOpButton(EfestoController efestoController, Method method) {
         super(getNameFromMethod(method.getName()), WIDTH, HEIGHT);
-
+        this.method = method;
         setupLooks();
 
         singleParameter = (method.getParameterCount() == 1);
+        System.out.println(method.getName() + "  " + Arrays.toString(method.getParameterTypes()));
         if (singleParameter) {
             this.textFormatter = getTypeFormatter(method.getParameters()[0].getType());
-        }
 
-        this.setOnAction(value -> {
-            if (!singleParameter) {
-                // Handle array types or other cases with more than one parameter
-                efestoController.inputText.setEditable(false);
-            } else {
+            this.setOnAction(value -> {
+                /*In case the button represents a single parameter method, */
                 efestoController.inputText.setEditable(true);
-                efestoController.outputText.setText("");
-                efestoController.currentMethod = method;
-                efestoController.inputText.setTextFormatter(textFormatter);
-            }
-        });
+                String oldText = efestoController.inputText.getText();
+
+                if (efestoController.currentButton != this) {
+                    efestoController.currentButton = this;
+                    efestoController.inputText.setTextFormatter(textFormatter);
+                }
+
+                efestoController.inputText.setText(oldText);
+            });
+        } else {
+            this.textFormatter = null;
+
+            this.setOnAction(value -> {
+                if (efestoController.currentButton != this) {
+                    efestoController.currentButton = this;
+                }
+                efestoController.inputText.setTextFormatter(null);
+                efestoController.inputText.setText(getNameFromMethod(getMethod().getName()) + Arrays.toString((Arrays.stream(getMethod().getParameters()).map(p -> p.getType().getName() + " " + p.getName()).toArray())));
+
+                this.paramDialog = new MFXParamDialog(this);
+                efestoController.inputText.setText( efestoController.inputText.getText() +
+                        " : " + Arrays.toString(this.getArgs()));
+            });
+        }
     }
 
     public static TextFormatter<?> getTypeFormatter(Class<?> type) {
+
         TextFormatter<?> textFormatter;
 
         if (type == int.class) {
             textFormatter = getIntTextFormatter();
         } else if (type == double.class) {
             textFormatter = getDoubleTextFormatter();
-        } else if (type == int[].class) {
-            textFormatter = getIntArrayTextFormatter();
-        } else if (type == double[].class) {
-            textFormatter = getDoubleArrayTextFormatter();
         } else {
             throw new IllegalArgumentException("Unsupported type: " + type.getName());
         }
@@ -85,7 +101,7 @@ public class MFXOpButton extends MFXButton {
      *
      * @return the human-readable version of the method as String
      */
-    private static String getNameFromMethod(String methodName) {
+    static String getNameFromMethod(String methodName) {
         StringBuilder buttonName = new StringBuilder();
 
         /*
@@ -111,14 +127,6 @@ public class MFXOpButton extends MFXButton {
 
         return buttonName.toString();
     }
-
-    /**
-     * Given a Type, sets the TextFormatter field used
-     * to filter input of a JavaFX TextField, depending on the Type
-     * the operations perform on.
-     *
-     * @param type parameter
-     */
 
     public static TextFormatter<Integer> getIntTextFormatter() {
         String regex = "^-?\\d+$";
@@ -248,5 +256,25 @@ public class MFXOpButton extends MFXButton {
         };
 
         return new TextFormatter<>(converter, new double[0], filter);
+    }
+
+    public TextFormatter<?> getTextFormatter() {
+        return textFormatter;
+    }
+
+    public boolean isSingleParameter() {
+        return singleParameter;
+    }
+
+    public Method getMethod() {
+        return method;
+    }
+
+    public Object[] getArgs() {
+        return args;
+    }
+
+    public void setArgs(Object[] args) {
+        this.args = args;
     }
 }

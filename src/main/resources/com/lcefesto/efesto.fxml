@@ -60,7 +60,7 @@
                   <Point3D />
                </rotationAxis>
                <children>
-                  <MFXButton layoutX="1212.0" layoutY="150.0" lineSpacing="1.0E-5" onAction="#onClearButtonClick" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="Clear" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                  <MFXButton layoutX="1212.0" layoutY="150.0" lineSpacing="1.0E-5" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onClearButtonClick" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="Clear" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                      <font>
                         <Font size="34.0" />
                      </font>
@@ -95,7 +95,7 @@
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <MFXButton layoutX="1212.0" layoutY="250.0" lineSpacing="1.0E-5" onAction="#onAnsButtonClick" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="ANS" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                  <MFXButton layoutX="1212.0" layoutY="250.0" lineSpacing="1.0E-5" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onAnsButtonClick" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="ANS" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                      <font>
                         <Font size="34.0" />
                      </font>
@@ -107,7 +107,7 @@
                         </DropShadow>
                      </effect>
                   </MFXButton>
-                  <MFXButton layoutX="1212.0" layoutY="50.0" lineSpacing="1.0E-5" onAction="#onEqualsButtonClick" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="=" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                  <MFXButton layoutX="1212.0" layoutY="50.0" lineSpacing="1.0E-5" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onEqualsButtonClick" prefHeight="60.0" prefWidth="180.0" style="-fx-background-radius: 24; -fx-background-color: #111111; -fx-text-fill: #f7f5ed;" text="=" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                      <font>
                         <Font name="System Bold" size="34.0" />
                      </font>

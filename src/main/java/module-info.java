@@ -5,10 +5,11 @@ module com.lcefesto {
     requires org.controlsfx.controls;
     requires MaterialFX;
     requires org.reflections;
-    //requires commons.math3;
 
     opens com.lcefesto to javafx.fxml;
     exports com.lcefesto;
     exports com.lcefesto.ops;
     opens com.lcefesto.ops to javafx.fxml;
+    exports com.lcefesto.customNodes;
+    opens com.lcefesto.customNodes to javafx.fxml;
 }

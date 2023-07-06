@@ -1,5 +1,7 @@
 package com.lcefesto;
 
+import com.lcefesto.ops.Mathematics;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -104,8 +106,8 @@ public class Matrix {
         return ret;
     }
 
-    public static Matrix matrixCopy(double[] datas, int r, int c) {
-        return new Matrix(datas, r, c);
+    public static Matrix matrixCopy(double[] data, int r, int c) {
+        return new Matrix(data, r, c);
     }
 
     public static boolean matrixContains(Matrix m, double element) {

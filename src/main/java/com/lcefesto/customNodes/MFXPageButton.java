@@ -1,4 +1,4 @@
-package com.lcefesto;
+package com.lcefesto.customNodes;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.enums.ButtonType;
