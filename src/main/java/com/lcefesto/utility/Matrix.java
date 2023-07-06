@@ -1,4 +1,4 @@
-package com.lcefesto;
+package com.lcefesto.utility;
 
 import com.lcefesto.ops.Mathematics;
 

@@ -1,7 +1,7 @@
-package com.lcefesto.customNodes;
+package com.lcefesto.customnodes;
 
 import com.lcefesto.EfestoController;
-import com.lcefesto.TextFormatterGenerator;
+import com.lcefesto.utility.TextFormatterGenerator;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.enums.ButtonType;
 
@@ -20,17 +20,14 @@ public class MFXOpButton extends MFXButton {
     public static final int WIDTH = 300;
     public static final int HEIGHT = 120;
     public static final String FONT_SIZE = "18";
-
     private final EfestoController controller;
-
     private final TextFormatter<?> textFormatter;
     private final Method method;
-    private MFXParamDialog paramDialog;
-    private Object[] args;
 
     /**
-     * Given a Method, creates an MFXButton with its OnAction option set as an EventHandler that (1) applies the method
-     * to the input value, parsed from the getInputText() TextField and (2) displays the result on the outputText TextField.
+     * Given its Controller and a Method, creates an MFXButton associated with the method,
+     * displaying its name and used by the controller class to execute operations on the input.
+     * Each MFXOpButton sets a different textFormatter, depending on the method's signature.
      *
      * @param method method of a class
      */
@@ -39,7 +36,6 @@ public class MFXOpButton extends MFXButton {
         this.method = method;
         this.controller = efestoController;
         this.textFormatter = TextFormatterGenerator.createTextFormatter(method);
-
         this.setOnAction(value -> {
             controller.getInputText().setEditable(true);
             String oldText = controller.getInputText().getText();
@@ -86,21 +82,7 @@ public class MFXOpButton extends MFXButton {
         setupLooks();
     }
 
-    public static TextFormatter<?> getTypeFormatter(Class<?> type) {
-
-        TextFormatter<?> textFormatter;
-
-        if (type == int.class) {
-            textFormatter = getIntTextFormatter();
-        } else if (type == double.class) {
-            textFormatter = getDoubleTextFormatter();
-        } else {
-            throw new IllegalArgumentException("Unsupported type: " + type.getName());
-        }
-
-        return textFormatter;
-    }
-
+    /** Simple method to set up the opButton's look.*/
     private void setupLooks() {
         setButtonType(ButtonType.RAISED);
         setPrefWidth(WIDTH);
@@ -143,136 +125,8 @@ public class MFXOpButton extends MFXButton {
         return buttonName.toString();
     }
 
-    public static TextFormatter<Integer> getIntTextFormatter() {
-        String regex = "^-?\\d+$";
-        Pattern validEditingState = Pattern.compile(regex);
 
-        StringConverter<Integer> converter = new StringConverter<>() {
-            @Override
-            public Integer fromString(String s) {
-                if (s.isEmpty() || "-".equals(s)) {
-                    return 0;
-                } else {
-                    return Integer.valueOf(s);
-                }
-            }
-
-            @Override
-            public String toString(Integer integer) {
-                return integer.toString();
-            }
-        };
-
-        UnaryOperator<TextFormatter.Change> filter = c -> {
-            String text = c.getControlNewText();
-            if (validEditingState.matcher(text).matches()) {
-                return c;
-            } else {
-                return null;
-            }
-        };
-
-        return new TextFormatter<>(converter, 0, filter);
-    }
-
-    public static TextFormatter<Double> getDoubleTextFormatter() {
-        String regex = "-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?([Ee][+-]?[0-9]+)?";
-        Pattern validEditingState = Pattern.compile(regex);
-
-        StringConverter<Double> converter = new StringConverter<>() {
-            @Override
-            public Double fromString(String s) {
-                if (s.isEmpty() || "-".equals(s) || ".".equals(s) || "-.".equals(s)) {
-                    return 0.0;
-                } else {
-                    return Double.valueOf(s);
-                }
-            }
-
-            @Override
-            public String toString(Double d) {
-                return String.valueOf(d);
-            }
-        };
-
-        UnaryOperator<TextFormatter.Change> filter = c -> {
-            String text = c.getControlNewText();
-            if (validEditingState.matcher(text).matches()) {
-                return c;
-            } else {
-                return null;
-            }
-        };
-
-        return new TextFormatter<>(converter, 0.0, filter);
-    }
-
-    public static TextFormatter<int[]> getMultiIntTextFormatter() {
-        String regex = "^-?\\d+(,-?\\d+)*$";
-        Pattern validEditingState = Pattern.compile(regex);
-
-        StringConverter<int[]> converter = new StringConverter<>() {
-            @Override
-            public int[] fromString(String s) {
-                if (s.isEmpty()) {
-                    return new int[0];
-                } else {
-                    String[] parts = s.split(",");
-                    return Arrays.stream(parts).mapToInt(Integer::parseInt).toArray();
-                }
-            }
-
-            @Override
-            public String toString(int[] ints) {
-                return Arrays.toString(ints).replace("[", "").replace("]", "");
-            }
-        };
-
-        UnaryOperator<TextFormatter.Change> filter = c -> {
-            String text = c.getControlNewText();
-            if (validEditingState.matcher(text).matches()) {
-                return c;
-            } else {
-                return null;
-            }
-        };
-
-        return new TextFormatter<>(converter, new int[0], filter);
-    }
-
-    public static TextFormatter<double[]> getMultiDoubleTextFormatter() {
-        String regex = "-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?([Ee][+-]?[0-9]+)?(,-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?([Ee][+-]?[0-9]+)?)*";
-        Pattern validEditingState = Pattern.compile(regex);
-
-        StringConverter<double[]> converter = new StringConverter<>() {
-            @Override
-            public double[] fromString(String s) {
-                if (s.isEmpty()) {
-                    return new double[0];
-                } else {
-                    String[] parts = s.split(",");
-                    return Arrays.stream(parts).mapToDouble(Double::parseDouble).toArray();
-                }
-            }
-
-            @Override
-            public String toString(double[] doubles) {
-                return Arrays.toString(doubles).replace("[", "").replace("]", "");
-            }
-        };
-
-        UnaryOperator<TextFormatter.Change> filter = c -> {
-            String text = c.getControlNewText();
-            if (validEditingState.matcher(text).matches()) {
-                return c;
-            } else {
-                return null;
-            }
-        };
-
-        return new TextFormatter<>(converter, new double[0], filter);
-    }
-
+    /* Getters and Setters */
     public TextFormatter<?> getTextFormatter() {
         return textFormatter;
     }
@@ -290,6 +144,5 @@ public class MFXOpButton extends MFXButton {
     }
 
     public void setArgs(Object[] args) {
-        this.args = args;
     }
 }

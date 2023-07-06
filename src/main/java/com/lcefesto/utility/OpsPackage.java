@@ -1,4 +1,4 @@
-package com.lcefesto;
+package com.lcefesto.utility;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;

@@ -10,6 +10,8 @@ module com.lcefesto {
     exports com.lcefesto;
     exports com.lcefesto.ops;
     opens com.lcefesto.ops to javafx.fxml;
-    exports com.lcefesto.customNodes;
-    opens com.lcefesto.customNodes to javafx.fxml;
+    exports com.lcefesto.customnodes;
+    opens com.lcefesto.customnodes to javafx.fxml;
+    exports com.lcefesto.utility;
+    opens com.lcefesto.utility to javafx.fxml;
 }

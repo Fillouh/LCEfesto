@@ -1,7 +1,8 @@
 package com.lcefesto;
 
-import com.lcefesto.customNodes.MFXOpButton;
-import com.lcefesto.customNodes.MFXPageButton;
+import com.lcefesto.customnodes.MFXOpButton;
+import com.lcefesto.customnodes.MFXPageButton;
+import com.lcefesto.utility.OpsPackage;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;

@@ -1,19 +1,15 @@
-package com.lcefesto.customNodes;
+package com.lcefesto.customnodes;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.enums.ButtonType;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.util.StringConverter;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
 
 public class MFXPageButton extends MFXButton {
     public static final int PAGE_BUTTON_WIDTH = 320;

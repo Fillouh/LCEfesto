@@ -1,4 +1,4 @@
-package com.lcefesto;
+package com.lcefesto.utility;
 
 public class Statistics {
     //COMBINATORICS

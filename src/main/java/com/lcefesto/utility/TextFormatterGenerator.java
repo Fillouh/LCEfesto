@@ -1,4 +1,4 @@
-package com.lcefesto;
+package com.lcefesto.utility;
 
 import javafx.util.StringConverter;
 import javafx.scene.control.TextFormatter;
