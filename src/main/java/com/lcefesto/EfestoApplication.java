@@ -13,6 +13,7 @@ public class EfestoApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(EfestoApplication.class.getResource("efesto.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Efesto");
+        stage.setResizable(true);
         //stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();

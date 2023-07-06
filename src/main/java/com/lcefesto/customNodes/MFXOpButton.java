@@ -1,6 +1,7 @@
 package com.lcefesto.customNodes;
 
 import com.lcefesto.EfestoController;
+import com.lcefesto.TextFormatterGenerator;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.enums.ButtonType;
 
@@ -20,55 +21,69 @@ public class MFXOpButton extends MFXButton {
     public static final int HEIGHT = 120;
     public static final String FONT_SIZE = "18";
 
+    private final EfestoController controller;
+
     private final TextFormatter<?> textFormatter;
-    public boolean singleParameter;
     private final Method method;
     private MFXParamDialog paramDialog;
     private Object[] args;
 
     /**
      * Given a Method, creates an MFXButton with its OnAction option set as an EventHandler that (1) applies the method
-     * to the input value, parsed from the inputText TextField and (2) displays the result on the outputText TextField.
+     * to the input value, parsed from the getInputText() TextField and (2) displays the result on the outputText TextField.
      *
      * @param method method of a class
      */
     public MFXOpButton(EfestoController efestoController, Method method) {
         super(getNameFromMethod(method.getName()), WIDTH, HEIGHT);
         this.method = method;
-        setupLooks();
+        this.controller = efestoController;
+        this.textFormatter = TextFormatterGenerator.createTextFormatter(method);
 
-        singleParameter = (method.getParameterCount() == 1);
-        System.out.println(method.getName() + "  " + Arrays.toString(method.getParameterTypes()));
-        if (singleParameter) {
+        this.setOnAction(value -> {
+            controller.getInputText().setEditable(true);
+            String oldText = controller.getInputText().getText();
+
+            if (controller.getCurrentButton() != this) {
+                controller.setCurrentButton(this);
+                controller.getInputText().setTextFormatter(textFormatter);
+            }
+
+            if(method.getParameterCount() == 1){
+                controller.getInputText().setText(oldText);
+            }
+        });
+        /*if (singleParameter) {
             this.textFormatter = getTypeFormatter(method.getParameters()[0].getType());
 
             this.setOnAction(value -> {
-                /*In case the button represents a single parameter method, */
-                efestoController.inputText.setEditable(true);
-                String oldText = efestoController.inputText.getText();
+
+                efestoController.getInputText().setEditable(true);
+                String oldText = efestoController.getInputText().getText();
 
                 if (efestoController.currentButton != this) {
                     efestoController.currentButton = this;
-                    efestoController.inputText.setTextFormatter(textFormatter);
+                    efestoController.getInputText().setTextFormatter(textFormatter);
                 }
 
-                efestoController.inputText.setText(oldText);
+                efestoController.getInputText().setText(oldText);
             });
         } else {
-            this.textFormatter = null;
-
+            this.textFormatter = getTypeFormatter(method.getParameters()[0].getType());
             this.setOnAction(value -> {
                 if (efestoController.currentButton != this) {
                     efestoController.currentButton = this;
                 }
-                efestoController.inputText.setTextFormatter(null);
-                efestoController.inputText.setText(getNameFromMethod(getMethod().getName()) + Arrays.toString((Arrays.stream(getMethod().getParameters()).map(p -> p.getType().getName() + " " + p.getName()).toArray())));
+                efestoController.getInputText().setTextFormatter(null);
+                efestoController.getInputText().setText(getNameFromMethod(getMethod().getName()) + Arrays.toString((Arrays.stream(getMethod().getParameters()).map(p -> p.getType().getName() + " " + p.getName()).toArray())));
 
                 this.paramDialog = new MFXParamDialog(this);
-                efestoController.inputText.setText( efestoController.inputText.getText() +
+                efestoController.getInputText().setText( efestoController.getInputText().getText() +
                         " : " + Arrays.toString(this.getArgs()));
+
             });
-        }
+        }*/
+        setupLooks();
     }
 
     public static TextFormatter<?> getTypeFormatter(Class<?> type) {
@@ -192,7 +207,7 @@ public class MFXOpButton extends MFXButton {
         return new TextFormatter<>(converter, 0.0, filter);
     }
 
-    public static TextFormatter<int[]> getIntArrayTextFormatter() {
+    public static TextFormatter<int[]> getMultiIntTextFormatter() {
         String regex = "^-?\\d+(,-?\\d+)*$";
         Pattern validEditingState = Pattern.compile(regex);
 
@@ -225,7 +240,7 @@ public class MFXOpButton extends MFXButton {
         return new TextFormatter<>(converter, new int[0], filter);
     }
 
-    public static TextFormatter<double[]> getDoubleArrayTextFormatter() {
+    public static TextFormatter<double[]> getMultiDoubleTextFormatter() {
         String regex = "-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?([Ee][+-]?[0-9]+)?(,-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?([Ee][+-]?[0-9]+)?)*";
         Pattern validEditingState = Pattern.compile(regex);
 
@@ -262,16 +277,16 @@ public class MFXOpButton extends MFXButton {
         return textFormatter;
     }
 
-    public boolean isSingleParameter() {
-        return singleParameter;
-    }
-
     public Method getMethod() {
         return method;
     }
 
     public Object[] getArgs() {
-        return args;
+        if( this.textFormatter.getValueConverter().fromString(this.controller.getInputText().getText()) instanceof Object[]) {
+            return (Object[]) this.textFormatter.getValueConverter().fromString(this.controller.getInputText().getText());
+        }else{
+            return new Object[]{this.textFormatter.getValueConverter().fromString(this.controller.getInputText().getText())};
+        }
     }
 
     public void setArgs(Object[] args) {

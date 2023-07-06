@@ -18,6 +18,7 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,11 +38,11 @@ public class EfestoController {
     @FXML
     private AnchorPane anchorPane;
     @FXML
-    public TextField inputText;
+    private TextField inputText;
     @FXML
-    public TextField outputText;
+    private TextField outputText;
 
-    public MFXOpButton currentButton;
+    private MFXOpButton currentButton;
 
     public void initialize() {
 
@@ -57,15 +58,8 @@ public class EfestoController {
     }
 
     public void onEqualsButtonClick() throws InvocationTargetException, IllegalAccessException {
-        if(currentButton.isSingleParameter()){
-            if(currentButton.getMethod().getParameters()[0].getParameterizedType() == double.class) {
-                outputText.setText(currentButton.getMethod().invoke(null, Double.parseDouble(inputText.getText())).toString());
-            }else if (currentButton.getMethod().getParameters()[0].getParameterizedType() == int.class){
-                outputText.setText(currentButton.getMethod().invoke(null, Integer.parseInt(inputText.getText())).toString());
-            }
-        }else{
-            outputText.setText(currentButton.getMethod().invoke(null, currentButton.getArgs()).toString());
-        }
+        System.out.println(Arrays.toString(currentButton.getArgs()));
+        outputText.setText(currentButton.getMethod().invoke(null, currentButton.getArgs()).toString());
     }
 
     /**
@@ -206,4 +200,45 @@ public class EfestoController {
             }
         }
     }
+
+    public MFXScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    public void setScrollPane(MFXScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+    }
+
+    public AnchorPane getAnchorPane() {
+        return anchorPane;
+    }
+
+    public void setAnchorPane(AnchorPane anchorPane) {
+        this.anchorPane = anchorPane;
+    }
+
+    public TextField getInputText() {
+        return inputText;
+    }
+
+    public void setInputText(TextField inputText) {
+        this.inputText = inputText;
+    }
+
+    public TextField getOutputText() {
+        return outputText;
+    }
+
+    public void setOutputText(TextField outputText) {
+        this.outputText = outputText;
+    }
+
+    public MFXOpButton getCurrentButton() {
+        return currentButton;
+    }
+
+    public void setCurrentButton(MFXOpButton currentButton) {
+        this.currentButton = currentButton;
+    }
+
 }
