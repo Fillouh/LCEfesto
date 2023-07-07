@@ -12,8 +12,7 @@ public class OpsPackage {
      * @param packageName String containing the pathname
      * */
     public static Set<Class<?>> findPackageClasses(String packageName) throws IOException {
-        Reflections reflections = new Reflections(packageName, Scanners.SubTypes.filterResultsBy(c -> true));//new
-        // SubTypesScanner(false)
+        Reflections reflections = new Reflections(packageName, Scanners.SubTypes.filterResultsBy(c -> true));
         reflections.getSubTypesOf(Object.class).forEach(s -> System.out.println(s.getName()));
         return new HashSet<>(reflections.getSubTypesOf(Object.class));
     }

@@ -1,0 +1,69 @@
+.root {
+    -lightbg: #EDEDED;
+    -darkbg: #1A1A1A;
+    -light: #F2F2F2;
+    -dark: #1A1A1A;
+}
+
+.light-side {
+    -fx-background-color: #EDEDED;
+    -fx-text-fill: black;
+}
+
+.dark-side {
+    -fx-background-color: #1A1A1A;
+    -fx-text-fill: white;
+}
+
+.toggle {
+    -fx-background-color: #F2F2F2;
+}
+
+.toggle.dark {
+    -fx-background-color: #1A1A1A;
+}
+
+.switch {
+    -fx-background-color: radial-gradient(center 40% 40%, radius 50%, #ACFF85, #66D233);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 0);
+}
+
+.switch.dark {
+    -fx-background-color: radial-gradient(center 40% 40%, radius 50%, #91D372, #35651E);
+}
+
+.switch.off-light {
+    -fx-background-color: radial-gradient(center 40% 40%, radius 50%, #D1D1D1, #DDDDDD);
+}
+
+.switch.off-red-light {
+    -fx-background-color: radial-gradient(center 40% 40%, radius 50%, #FF7676, #ED5C5C);
+}
+
+.switch.off-dark {
+    -fx-background-color: radial-gradient(center 40% 40%, radius 50%, #343434, #484848);
+}
+
+.switch.off-red-dark {
+    -fx-background-color: radial-gradient(center 40% 40%, radius 50%, #A63D3D, #6F2929);
+}
+
+@keyframes bounce-left {
+    0% { -fx-translate-x: 0; }
+    15% { -fx-translate-x: -180; }
+    30% { -fx-translate-x: -150; }
+    45% { -fx-translate-x: -160; }
+    60% { -fx-translate-x: -150; }
+    75% { -fx-translate-x: -152; }
+    100% { -fx-translate-x: -150; }
+}
+
+@keyframes bounce-right {
+    0% { -fx-translate-x: -150; }
+    15% { -fx-translate-x: 30; }
+    30% { -fx-translate-x: 0; }
+    45% { -fx-translate-x: 10; }
+    60% { -fx-translate-x: 0; }
+    75% { -fx-translate-x: 2; }
+    100% { -fx-translate-x: 0; }
+}

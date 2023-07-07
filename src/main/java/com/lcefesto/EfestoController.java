@@ -47,7 +47,7 @@ public class EfestoController {
     public void initialize() {
 
         try {
-            List<Node> list = OpsPackage.findPackageClasses("com.lcefesto.ops").stream().map(this::createPageButton).collect(Collectors.toList());
+            List<Node> list = OpsPackage.findPackageClasses("com.lcefesto.ops").stream().map(c -> new MFXPageButton(this, c)).collect(Collectors.toList());
             GridPane pagesGridPane = createGridPane(PAGES_GRID_WIDTH, PAGES_GRID_HEIGHT, BACKGROUND_COLOR + "transparent;", getRowsNumber(list.size(), PAGES_GRID_COLS), PAGES_GRID_COLS, MFXPageButton.PAGE_BUTTON_HEIGHT + 60);
             populateGridpane(pagesGridPane, list);
             pagesGridPane.setAlignment(Pos.TOP_LEFT);
@@ -91,40 +91,9 @@ public class EfestoController {
     }
 
     /**
-     * Used to create an instance of MFXPageButton, starting from a class.
-     * An MFXPageButton represents a set of operations to perform on the input,
-     * consisting of methods declared in the same class, and is named after it.
-     *
-     * @param c the class, a collection of static methods and constants
-     */
-    private MFXPageButton createPageButton(Class<?> c) {
-
-        MFXPageButton pageButton = new MFXPageButton(c);
-
-        GridPane.setHalignment(pageButton, HPos.CENTER);
-        GridPane.setValignment(pageButton, VPos.CENTER);
-
-        pageButton.setOnAction(event -> {
-            showScrollPane();
-
-            MFXPageButton mfxPageButton = (MFXPageButton) event.getSource();
-
-            GridPane pane = createGridPane(OPS_GRID_WIDTH, OPS_GRID_HEIGHT, BACKGROUND_COLOR + BLACK + ";", getRowsNumber(mfxPageButton.getMethodList().size(), OPS_GRID_COLS), OPS_GRID_COLS, MFXOpButton.HEIGHT + 60);
-
-            List<Node> buttonList = mfxPageButton.getMethodList().stream().map(m -> new MFXOpButton(this, m)).collect(Collectors.toList());
-
-            populateGridpane(pane, buttonList);
-
-            scrollPane.setContent(pane);
-        });
-
-        return pageButton;
-    }
-
-    /**
      * Simple method to set up the ScrollPane's looks for usage.
      */
-    private void showScrollPane() {
+    public void showScrollPane() {
         scrollPane.setOpacity(1);
         scrollPane.setStyle("-fx-background-color: transparent");
     }
