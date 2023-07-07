@@ -4,14 +4,12 @@ import com.lcefesto.EfestoController;
 import com.lcefesto.utility.TextFormatterGenerator;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.enums.ButtonType;
-
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import javafx.util.StringConverter;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static com.lcefesto.EfestoController.DEEP_BLACK;
 import static com.lcefesto.EfestoController.LIGHT_GRAY;
@@ -21,8 +19,12 @@ public class MFXOpButton extends MFXButton {
     public static final int HEIGHT = 120;
     public static final String FONT_SIZE = "18";
     private final EfestoController controller;
+
+    private final String name;
     private final TextFormatter<?> textFormatter;
     private final Method method;
+
+
 
     /**
      * Given its Controller and a Method, creates an MFXButton associated with the method,
@@ -33,20 +35,29 @@ public class MFXOpButton extends MFXButton {
      */
     public MFXOpButton(EfestoController efestoController, Method method) {
         super(getNameFromMethod(method.getName()), WIDTH, HEIGHT);
+        this.name = getNameFromMethod(method.getName());
         this.method = method;
         this.controller = efestoController;
         this.textFormatter = TextFormatterGenerator.createTextFormatter(method);
         this.setOnAction(value -> {
-            controller.getInputText().setEditable(true);
-            String oldText = controller.getInputText().getText();
+            TextField inputText = controller.getInputText();
+            TextField outputText = controller.getOutputText();
+            String oldText = inputText.getText();
 
             if (controller.getCurrentButton() != this) {
                 controller.setCurrentButton(this);
-                controller.getInputText().setTextFormatter(textFormatter);
+                inputText.setTextFormatter(textFormatter);
             }
 
+            inputText.setEditable(true);
+            inputText.setPromptText(this.name + Arrays.stream(method.getParameters()).map(p -> p.getType().getName() + " " + p.getName()).toList().toString().replace("[", "(").replace("]", ")"));
+            outputText.setPromptText("Returns: " + method.getReturnType().getName());
+
             if(method.getParameterCount() == 1){
-                controller.getInputText().setText(oldText);
+                inputText.setText(oldText);
+            }else{
+                inputText.setText("");
+                outputText.setPromptText("Returns: " + method.getReturnType().getName());
             }
         });
         /*if (singleParameter) {
@@ -136,13 +147,15 @@ public class MFXOpButton extends MFXButton {
     }
 
     public Object[] getArgs() {
-        if( this.textFormatter.getValueConverter().fromString(this.controller.getInputText().getText()) instanceof Object[]) {
-            return (Object[]) this.textFormatter.getValueConverter().fromString(this.controller.getInputText().getText());
+        TextField inputText = this.controller.getInputText();
+        if( this.textFormatter.getValueConverter().fromString(inputText.getText()) instanceof Object[]) {
+            return (Object[]) this.textFormatter.getValueConverter().fromString(inputText.getText());
         }else{
-            return new Object[]{this.textFormatter.getValueConverter().fromString(this.controller.getInputText().getText())};
+            return new Object[]{this.textFormatter.getValueConverter().fromString(inputText.getText())};
         }
     }
 
-    public void setArgs(Object[] args) {
+    public String getName() {
+        return name;
     }
 }

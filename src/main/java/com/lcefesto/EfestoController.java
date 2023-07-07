@@ -4,18 +4,17 @@ import com.lcefesto.customnodes.MFXOpButton;
 import com.lcefesto.customnodes.MFXPageButton;
 import com.lcefesto.utility.OpsPackage;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
+import io.github.palexdev.materialfx.controls.MFXSimpleNotification;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
-
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -48,7 +47,7 @@ public class EfestoController {
     public void initialize() {
 
         try {
-            List<Node> list = OpsPackage.findAllClassesUsingGoogleGuice("com.lcefesto.ops").stream().map(this::createPageButton).collect(Collectors.toList());
+            List<Node> list = OpsPackage.findPackageClasses("com.lcefesto.ops").stream().map(this::createPageButton).collect(Collectors.toList());
             GridPane pagesGridPane = createGridPane(PAGES_GRID_WIDTH, PAGES_GRID_HEIGHT, BACKGROUND_COLOR + "transparent;", getRowsNumber(list.size(), PAGES_GRID_COLS), PAGES_GRID_COLS, MFXPageButton.PAGE_BUTTON_HEIGHT + 60);
             populateGridpane(pagesGridPane, list);
             pagesGridPane.setAlignment(Pos.TOP_LEFT);
@@ -58,9 +57,22 @@ public class EfestoController {
         }
     }
 
-    public void onEqualsButtonClick() throws InvocationTargetException, IllegalAccessException {
-        System.out.println(Arrays.toString(currentButton.getArgs()));
-        outputText.setText(currentButton.getMethod().invoke(null, currentButton.getArgs()).toString());
+    public void onEqualsButtonClick() {
+        try {
+            outputText.setText(applyMethod().toString());
+        } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
+            outputText.setText("Wrong arguments for " + currentButton.getName() + ".");
+        }
+    }
+
+    private Object applyMethod() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+        Object returnValue = currentButton.getMethod().invoke(null, currentButton.getArgs());
+        System.out.println(returnValue);
+        if (returnValue == null) {
+            throw new IllegalArgumentException();
+        } else {
+            return returnValue;
+        }
     }
 
     /**
@@ -99,8 +111,7 @@ public class EfestoController {
 
             GridPane pane = createGridPane(OPS_GRID_WIDTH, OPS_GRID_HEIGHT, BACKGROUND_COLOR + BLACK + ";", getRowsNumber(mfxPageButton.getMethodList().size(), OPS_GRID_COLS), OPS_GRID_COLS, MFXOpButton.HEIGHT + 60);
 
-            List<Node> buttonList =
-                    mfxPageButton.getMethodList().stream().map(m -> new MFXOpButton(this, m)).collect(Collectors.toList());
+            List<Node> buttonList = mfxPageButton.getMethodList().stream().map(m -> new MFXOpButton(this, m)).collect(Collectors.toList());
 
             populateGridpane(pane, buttonList);
 
@@ -202,6 +213,8 @@ public class EfestoController {
         }
     }
 
+    /* Getters and Setters */
+
     public MFXScrollPane getScrollPane() {
         return scrollPane;
     }
@@ -241,5 +254,4 @@ public class EfestoController {
     public void setCurrentButton(MFXOpButton currentButton) {
         this.currentButton = currentButton;
     }
-
 }

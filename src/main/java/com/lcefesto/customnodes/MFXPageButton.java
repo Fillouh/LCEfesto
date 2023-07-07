@@ -45,6 +45,8 @@ public class MFXPageButton extends MFXButton {
 
     /** Creates an alphabetically ordered list of methods starting
      * from the list of declared methods of the passed class.
+     *
+     * @param opClass class meeting requirements
      * */
     public void setMethodList(Class<?> opClass) {
         this.methodList =

@@ -1,7 +1,7 @@
 package com.lcefesto.utility;
 
-import javafx.util.StringConverter;
 import javafx.scene.control.TextFormatter;
+import javafx.util.StringConverter;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
