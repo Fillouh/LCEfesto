@@ -121,6 +121,8 @@ if you have a JDK installed with Version 17 or above.
 * ***Pietro Carrucciu*** : (https://github.com/carruc)
 * ***Filippo Leonelli*** : (https://github.com/fillouh)
 
+## LICENSE :
+All code is distributed under the MIT license (see LICENSE).
 
 
 
