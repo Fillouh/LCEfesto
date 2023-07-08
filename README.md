@@ -4,10 +4,11 @@
 but without going on the Internet.
 
 ## Table of Contents :
-* [Overview](#Overview)
-* [Features](#Features)
-* [Installing](#Installing)
-* [Authors](#Authors)
+* [Overview](#overview-)
+* [Features](#features-)
+* [How to use](#how-to-use-)
+* [Installing](#installing-)
+* [Authors](#authors-)
 
 ## Overview :
 Logo:
