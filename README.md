@@ -117,9 +117,6 @@ into the input textfield ready to perform another operation/conversion :
 You can use Efesto whenever you want, simply by cloning this repository and opening it in your IDE, 
 if you have a JDK installed with Version 17 or above.
 
-### Jar :
-
-
 ## Authors:
 * ***Pietro Carrucciu*** : (https://github.com/carruc)
 * ***Filippo Leonelli*** : (https://github.com/fillouh)
