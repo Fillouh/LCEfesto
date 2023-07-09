@@ -1,6 +1,6 @@
 # LCEfesto
 ***LCEfesto*** was thought to be a ***simple*** tool that can solve those classic ***math*** and
-***conversion*** problems that all students of any engineering face in solving more complicated problems,
+***conversion*** problems that all students engaged in STEM studies face while solving more complicated problems,
 but without going on the Internet.
 
 ## Table of Contents :
@@ -13,7 +13,7 @@ but without going on the Internet.
 ## Overview :
 Logo:
 
-![logo](/src/main/resources/com/lcefesto/images/Logo.PNG)
+![logo](/src/main/resources/com/lcefesto/efesto.png)
 
 As soon as you have opened ***Efesto*** you will find yourself in front of this screen:
 
