@@ -13,7 +13,7 @@ but without going on the Internet.
 ## Overview :
 Logo:
 
-![logo](/src/main/resources/com/lcefesto/efesto.png)
+![logo](/src/main/resources/com/lcefesto/images/efesto135px.png)
 
 As soon as you have opened ***Efesto*** you will find yourself in front of this screen:
 
