@@ -4,7 +4,6 @@ import com.lcefesto.customnodes.MFXOpButton;
 import com.lcefesto.customnodes.MFXPageButton;
 import com.lcefesto.utility.OpsPackage;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
-import io.github.palexdev.materialfx.controls.MFXSimpleNotification;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -18,7 +17,6 @@ import javafx.scene.layout.RowConstraints;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +40,8 @@ public class EfestoController {
     @FXML
     private TextField outputText;
 
-    private MFXOpButton currentButton;
+    private MFXOpButton currentOpButton;
+    private MFXPageButton currentPageButton;
 
     public void initialize() {
 
@@ -61,12 +60,12 @@ public class EfestoController {
         try {
             outputText.setText(applyMethod().toString());
         } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-            outputText.setText("Wrong arguments for " + currentButton.getName() + ".");
+            outputText.setText("Wrong arguments for " + currentOpButton.getName() + ".");
         }
     }
 
     private Object applyMethod() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
-        Object returnValue = currentButton.getMethod().invoke(null, currentButton.getArgs());
+        Object returnValue = currentOpButton.getMethod().invoke(null, currentOpButton.getArgs());
         System.out.println(returnValue);
         if (returnValue == null) {
             throw new IllegalArgumentException();
@@ -187,40 +186,26 @@ public class EfestoController {
     public MFXScrollPane getScrollPane() {
         return scrollPane;
     }
-
-    public void setScrollPane(MFXScrollPane scrollPane) {
-        this.scrollPane = scrollPane;
-    }
-
-    public AnchorPane getAnchorPane() {
-        return anchorPane;
-    }
-
-    public void setAnchorPane(AnchorPane anchorPane) {
-        this.anchorPane = anchorPane;
-    }
-
     public TextField getInputText() {
         return inputText;
     }
-
-    public void setInputText(TextField inputText) {
-        this.inputText = inputText;
-    }
-
     public TextField getOutputText() {
         return outputText;
     }
 
-    public void setOutputText(TextField outputText) {
-        this.outputText = outputText;
+    public MFXOpButton getCurrentOpButton() {
+        return currentOpButton;
     }
 
-    public MFXOpButton getCurrentButton() {
-        return currentButton;
+    public void setCurrentOpButton(MFXOpButton currentOpButton) {
+        this.currentOpButton = currentOpButton;
     }
 
-    public void setCurrentButton(MFXOpButton currentButton) {
-        this.currentButton = currentButton;
+    public MFXPageButton getCurrentPageButton() {
+        return currentPageButton;
+    }
+
+    public void setCurrentPageButton(MFXPageButton currentPageButton) {
+        this.currentPageButton = currentPageButton;
     }
 }

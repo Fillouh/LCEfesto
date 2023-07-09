@@ -42,34 +42,25 @@ public class MFXPageButton extends MFXButton {
         super(opClass.getSimpleName(), PAGE_BUTTON_WIDTH, PAGE_BUTTON_HEIGHT);
         this.setMethodList(opClass);
         this.setupLooks();
-        this.getStyleClass().add("toggle");
-
+        //this.getStyleClass().add("toggle");
         this.setOnAction(event -> {
-            // Create the left animation
-            TranslateTransition leftAnimation = new TranslateTransition(Duration.seconds(0.3),this);
-            leftAnimation.setFromX(0);
-            leftAnimation.setToX(-40);
-            leftAnimation.setCycleCount(2);
-            leftAnimation.setAutoReverse(true);
-            leftAnimation.setInterpolator(Interpolator.SPLINE(0.1, 0.9, 0.3, 1.0));
 
-            // Create the right animation
-            TranslateTransition rightAnimation = new TranslateTransition(Duration.seconds(0.3),this);
-            rightAnimation.setFromX(0);
-            rightAnimation.setToX(40);
-            rightAnimation.setCycleCount(2);
-            rightAnimation.setAutoReverse(true);
-            rightAnimation.setInterpolator(Interpolator.SPLINE(0.1, 0.9, 0.3, 1.0));
-
-            if (leftAnimation.getStatus() != javafx.animation.Animation.Status.RUNNING) {
-                leftAnimation.play();
+            if (controller.getCurrentPageButton() != null && controller.getCurrentPageButton() != this) {
+                controller.getCurrentPageButton().onDeselectionAnimation();
             }
+
+            controller.setCurrentPageButton(this);
+            this.onSelectionAnimation();
+
             controller.showScrollPane();
             GridPane pane = createGridPane(OPS_GRID_WIDTH, OPS_GRID_HEIGHT, BACKGROUND_COLOR + BLACK + ";", getRowsNumber(this.getMethodList().size(), OPS_GRID_COLS), OPS_GRID_COLS, MFXOpButton.HEIGHT + 60);
             List<Node> buttonList = this.getMethodList().stream().map(m -> new MFXOpButton(controller, m)).collect(Collectors.toList());
             populateGridpane(pane, buttonList);
             controller.getScrollPane().setContent(pane);
         });
+
+
+
     }
 
     /** Sets up the Default Looks for an MFXPageButton. */
@@ -95,7 +86,35 @@ public class MFXPageButton extends MFXButton {
         this.methodList = new ArrayList<>(Arrays.stream(opClass.getDeclaredMethods()).filter(m -> Modifier.isStatic(m.getModifiers())).sorted((o1, o2) -> String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName())).toList());
     }
 
+    /*Getters and Setters*/
+
     public List<Method> getMethodList() {
         return methodList;
+    }
+
+    private TranslateTransition setAnimationStyle() {
+        TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.7), this);
+        translateAnimation.setFromX(0);
+        translateAnimation.setInterpolator(Interpolator.SPLINE(0.1, 0.9, 0.3, 1.0));
+        return translateAnimation;
+    }
+
+    public void onDeselectionAnimation() {
+        TranslateTransition translateAnimation = setAnimationStyle();
+        translateAnimation.setToX(-20);
+
+        if (translateAnimation.getStatus() != javafx.animation.Animation.Status.RUNNING) {
+            translateAnimation.play();
+        }
+
+    }
+
+    public void onSelectionAnimation() {
+        TranslateTransition translateAnimation = setAnimationStyle();
+        translateAnimation.setToX(20);
+
+        if (translateAnimation.getStatus() != javafx.animation.Animation.Status.RUNNING) {
+            translateAnimation.play();
+        }
     }
 }

@@ -9,27 +9,26 @@ import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class TextFormatterGenerator {
+public class TextFormatterGenerator<T> {
     public static <T> TextFormatter<T> createTextFormatter(Method method) {
         Class<?>[] parameterTypes = method.getParameterTypes();
         StringBuilder regexBuilder = new StringBuilder();
-        StringBuilder toStringBuilder = new StringBuilder();
-        Object defaultValue = null;
+        Object defaultValue;
 
         if (parameterTypes.length == 1) {
             Class<?> parameterType = parameterTypes[0];
             if (parameterType == int.class) {
                 regexBuilder.append("-?\\d+");
-                defaultValue = (T) Integer.valueOf(0);
+                defaultValue = 0;
             } else if (parameterType == double.class) {
                 regexBuilder.append("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?([Ee][+-]?[0-9]+)?");
-                defaultValue = (T) Double.valueOf(0.0);
+                defaultValue = 0.0;
             } else {
                 throw new IllegalArgumentException("Unsupported parameter type: " + parameterType.getSimpleName());
             }
         } else {
             regexBuilder.append("[-\\d.,\\s]+");
-            defaultValue = (T) new Object[parameterTypes.length];
+            defaultValue = new Object[parameterTypes.length];
 
             for (Class<?> parameterType : parameterTypes) {
                 if (parameterType != int.class && parameterType != double.class) {
@@ -39,7 +38,6 @@ public class TextFormatterGenerator {
         }
 
         String regex = regexBuilder.toString();
-        String toStringPattern = toStringBuilder.toString();
 
         Pattern validEditingState = Pattern.compile("^" + regex + "$");
 
@@ -81,9 +79,7 @@ public class TextFormatterGenerator {
                         return t.toString();
                     } else {
                         Object[] values = (Object[]) t;
-                        return Arrays.stream(values)
-                                .map(Object::toString)
-                                .collect(Collectors.joining(", "));
+                        return Arrays.stream(values).map(Object::toString).collect(Collectors.joining(", "));
                     }
                 }
             }
@@ -98,80 +94,10 @@ public class TextFormatterGenerator {
             }
         };
 
-        return new TextFormatter<T>(converter,(T) defaultValue, filter);
-    }
-
-
-
-
-    /*public static <T> TextFormatter<T> createTextFormatter(Method method) {
-        Class<?>[] parameterTypes = method.getParameterTypes();
-        StringBuilder regexBuilder = new StringBuilder();
-        StringBuilder toStringBuilder = new StringBuilder();
-        Object defaultValue = null;
-
-        for (Class<?> parameterType : parameterTypes) {
-            if (parameterType == int.class) {
-                regexBuilder.append("-?\\d+");
-                defaultValue = 0;
-            } else if (parameterType == double.class) {
-                regexBuilder.append("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?([Ee][+-]?[0-9]+)?");
-                defaultValue = 0.0;
-            } else {
-                throw new IllegalArgumentException("Unsupported parameter type: " + parameterType.getSimpleName());
-            }
-
-            regexBuilder.append(",");
-            toStringBuilder.append("%s,");
+        try{
+            return new TextFormatter<T>(converter, (T) defaultValue, filter);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        String regex = regexBuilder.substring(0, regexBuilder.length() - 1);
-        String toStringPattern = toStringBuilder.substring(0, toStringBuilder.length() - 1);
-
-        Pattern validEditingState = Pattern.compile("^" + regex + "$");
-
-        StringConverter<T> converter = new StringConverter<>() {
-            @Override
-            public T fromString(String s) {
-                if (s.isEmpty()) {
-                    return null;
-                } else {
-                    String[] parts = s.split(",");
-                    Object[] values = new Object[parameterTypes.length];
-                    for (int i = 0; i < parameterTypes.length; i++) {
-                        Class<?> type = parameterTypes[i];
-                        if (type == int.class) {
-                            values[i] = Integer.parseInt(parts[i]);
-                        } else if (type == double.class) {
-                            values[i] = Double.parseDouble(parts[i]);
-                        }
-                        // Add more cases for additional parameter types if needed
-                    }
-                    return (T) values;
-                }
-            }
-
-            @Override
-            public String toString(T t) {
-                if (t == null) {
-                    return "";
-                } else {
-                    Object[] values = (Object[]) t;
-                    return String.format(toStringPattern, values);
-                }
-            }
-        };
-
-        UnaryOperator<TextFormatter.Change> filter = c -> {
-            String text = c.getControlNewText();
-
-            if (validEditingState.matcher(text).matches()) {
-                return c;
-            } else {
-                return null;
-            }
-        };
-
-        return new TextFormatter<T>(converter, (T) defaultValue, filter);
-    }*/
+    }
 }
