@@ -1,6 +1,6 @@
 # LCEfesto
-***LCEfesto*** was thought to be a ***simple*** tool that can solve those classic ***math problems*** and
-***conversion*** that all students of any engineering face in solving more complicated problems,
+***LCEfesto*** was thought to be a ***simple*** tool that can solve those classic ***math*** and
+***conversion*** problems that all students of any engineering face in solving more complicated problems,
 but without going on the Internet.
 
 ## Table of Contents :
