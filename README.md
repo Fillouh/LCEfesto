@@ -9,6 +9,7 @@ but without going on the Internet.
 * [How to use](#how-to-use-)
 * [Installing](#installing-)
 * [Authors](#authors-)
+* [License](#license-)
 
 ## Overview :
 Logo:
@@ -18,7 +19,7 @@ Logo:
 As soon as you have opened ***Efesto*** you will find yourself in front of this screen:
 
 
-![main-view](/src/main/resources/com/lcefesto/images/Pagina%20principale.PNG)
+![main-view](/src/main/resources/com/lcefesto/images/main%20view%202.PNG)
 
 
 Here you will have the possibility to choose between two tools button according to your needs :
@@ -26,6 +27,10 @@ Here you will have the possibility to choose between two tools button according 
 ***Converter*** :
 
 ![conv](/src/main/resources/com/lcefesto/images/conv.PNG)
+
+***Statistics*** :
+
+![stat](/src/main/resources/com/lcefesto/images/stat.PNG)
 
 ***Mathematics***:
 
@@ -37,7 +42,7 @@ Inside the ***Converter*** section you can choose from over ***176 possible conv
 displayed in alphabetical order, including most ISU units and many extra-ISU ones.
 
 
-![converter-ex](/src/main/resources/com/lcefesto/images/conveex.PNG)
+![converter-ex](/src/main/resources/com/lcefesto/images/conveex2.PNG)
 
 The available converters allow conversions for the following physical quantities:
 * ***SI prefixes***
@@ -59,12 +64,27 @@ The available converters allow conversions for the following physical quantities
 * ***Angular speed***
 * ***Volume***
 
+### Statistics :
+Inside the ***Statistics*** section you can choose from ***6 possible combinatorics funtions***,
+displayed in alphabetical order, for the operation that you want to compute.
+
+
+![stat-view](/src/main/resources/com/lcefesto/images/stat%20view.PNG)
+
+The possible operations you can choose from are:
+* ***Arrangements Without Repetition***
+* ***Arrangements With Repetition***
+* ***Binomial Coefficient***
+* ***Factorial***
+* ***Semi-Factorial***
+* ***Symmetric Binomial Coefficient***
+
 ### Mathematics :
 Inside the ***Mathematics*** section you can choose from over ***26 possible simple functions***,
 collected in alphabetical order, for the operation that you want to compute.
 
 
-![math-ex](/src/main/resources/com/lcefesto/images/mathex.PNG)
+![math-ex](/src/main/resources/com/lcefesto/images/mat%20view%202.PNG)
 
 The possible operations you can choose from are:
 * ***Absolute value*** --->(Abs)
@@ -123,6 +143,5 @@ if you have a JDK installed with Version 17 or above.
 
 ## LICENSE :
 All code is distributed under the MIT license (see LICENSE).
-
 
 
