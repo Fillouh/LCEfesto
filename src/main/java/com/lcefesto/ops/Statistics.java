@@ -6,14 +6,14 @@ public class Statistics {
         if(number<0){
             throw new IllegalArgumentException("The parameter n must be a positive!");
         }
-        if(number==0){
+        if(number == 0){
             return 1;
         }
-        double num=number;
-        for(double i=1;i<number;++i){
-            number*=i;
+        double num = number;
+        for(int i = 1; i < number; ++i){
+            num *= i;
         }
-        return number;
+        return num;
     }
 
     public static double semiFactorial(double number){
