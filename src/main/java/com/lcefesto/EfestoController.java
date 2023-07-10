@@ -83,6 +83,7 @@ public class EfestoController {
      */
     public void onClearButtonClick() {
         inputText.setText("");
+        outputText.setText("");
     }
 
     /**
@@ -90,6 +91,7 @@ public class EfestoController {
      */
     public void onAnsButtonClick() {
         inputText.setText(outputText.getText());
+        outputText.setText("");
     }
 
     /**
