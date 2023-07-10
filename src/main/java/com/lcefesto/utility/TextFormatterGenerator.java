@@ -11,12 +11,26 @@ import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**Original class for creation of custom TextFormatters.
+ * @author Pietro Carrucciu*/
 public class TextFormatterGenerator {
+
+    public static final String INT_REGEX = "-?\\d+";
+    public static final String DOUBLE_REGEX = "-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?([Ee][+-]?[0-9]+)?";
+    public static final String MULTI_REGEX = "[-\\d.,\\s]+";
+
+    /**Creates a custom TextFormatter object starting from a Method's list of parameter types.
+     * @param method the selected Method
+     * @return a new TextFormatter< T > object
+     * @see TextFormatter
+     * @see Method
+     * */
     public static <T> TextFormatter<T> createTextFormatter(Method method) {
         Class<?>[] parameterTypes = method.getParameterTypes();
         Pair<String, Object> filters = createRegex(parameterTypes);
         Pattern validEditingState = Pattern.compile("^" + filters.getKey() + "$");
 
+        //Should implement with Optional
         StringConverter<T> converter = new StringConverter<>() {
             @Override
             public T fromString(String s) {
@@ -81,23 +95,32 @@ public class TextFormatterGenerator {
         }
     }
 
+    //I know, terrible implementation. But for performance's and readability's sake I went with this solution
+
+    /**Creates a custom regex depending on the number of parameters and parameter type.
+     * @param parameterTypes Class[] containing the Method's parameter types
+     * @return a new Pair containing the regex and defaultValue
+     * @see TextFormatterGenerator
+     * */
     private static Pair<String, Object> createRegex(Class<?>[] parameterTypes){
         StringBuilder regexBuilder = new StringBuilder();
-        Object defaultValue;
+        Object defaultValue; //default value in case textformatting requirements are not met
 
+        // Single parameter and multiple parameters distinction
         if (parameterTypes.length == 1) {
             Class<?> parameterType = parameterTypes[0];
             if (parameterType == int.class) {
-                regexBuilder.append("-?\\d+");
+
+                regexBuilder.append(INT_REGEX);
                 defaultValue = 0;
             } else if (parameterType == double.class) {
-                regexBuilder.append("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?([Ee][+-]?[0-9]+)?");
+                regexBuilder.append(DOUBLE_REGEX);
                 defaultValue = 0.0;
             } else {
                 throw new IllegalArgumentException("Unsupported parameter type: " + parameterType.getSimpleName());
             }
         } else {
-            regexBuilder.append("[-\\d.,\\s]+");
+            regexBuilder.append(MULTI_REGEX);
             defaultValue = new Object[parameterTypes.length];
 
             for (Class<?> parameterType : parameterTypes) {

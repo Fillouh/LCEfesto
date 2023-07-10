@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+/**Container class for the findPackageClasses static method.
+ * @author Pietro Carrucciu*/
 public class OpsPackage {
     /**
      * Static methods that scans the desired package for Java Classes, returning a Set of Generic Class objects.
