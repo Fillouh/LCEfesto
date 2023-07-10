@@ -1,6 +1,6 @@
 # LCEfesto
-***LCEfesto*** was thought to be a ***simple*** tool that can solve those classic ***math problems*** and
-***conversion*** that all students of any engineering face in solving more complicated problems,
+***LCEfesto*** was thought to be a ***simple*** tool that can solve those classic ***math*** and
+***conversion*** problems that all students engaged in STEM studies face while solving more complicated problems,
 but without going on the Internet.
 
 ## Table of Contents :
@@ -13,7 +13,7 @@ but without going on the Internet.
 ## Overview :
 Logo:
 
-![logo](/src/main/resources/com/lcefesto/images/Logo.PNG)
+![logo](/src/main/resources/com/lcefesto/images/efesto135px.png)
 
 As soon as you have opened ***Efesto*** you will find yourself in front of this screen:
 
@@ -34,7 +34,7 @@ Here you will have the possibility to choose between two tools button according 
 ## Features :
 ### Converter :
 Inside the ***Converter*** section you can choose from over ***176 possible converters***, 
-collected in alphabetical order, for the size you want to convert.
+displayed in alphabetical order, including most ISU units and many extra-ISU ones.
 
 
 ![converter-ex](/src/main/resources/com/lcefesto/images/conveex.PNG)
@@ -121,6 +121,8 @@ if you have a JDK installed with Version 17 or above.
 * ***Pietro Carrucciu*** : (https://github.com/carruc)
 * ***Filippo Leonelli*** : (https://github.com/fillouh)
 
+## LICENSE :
+All code is distributed under the MIT license (see LICENSE).
 
 
 

@@ -4,7 +4,6 @@ import com.lcefesto.customnodes.MFXOpButton;
 import com.lcefesto.customnodes.MFXPageButton;
 import com.lcefesto.utility.OpsPackage;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
-import io.github.palexdev.materialfx.controls.MFXSimpleNotification;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -18,7 +17,6 @@ import javafx.scene.layout.RowConstraints;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,12 +40,12 @@ public class EfestoController {
     @FXML
     private TextField outputText;
 
-    private MFXOpButton currentButton;
+    private MFXOpButton currentOpButton;
+    private MFXPageButton currentPageButton;
 
     public void initialize() {
-
         try {
-            List<Node> list = OpsPackage.findPackageClasses("com.lcefesto.ops").stream().map(this::createPageButton).collect(Collectors.toList());
+            List<Node> list = OpsPackage.findPackageClasses("com.lcefesto.ops").stream().map(c -> new MFXPageButton(this, c)).collect(Collectors.toList());
             GridPane pagesGridPane = createGridPane(PAGES_GRID_WIDTH, PAGES_GRID_HEIGHT, BACKGROUND_COLOR + "transparent;", getRowsNumber(list.size(), PAGES_GRID_COLS), PAGES_GRID_COLS, MFXPageButton.PAGE_BUTTON_HEIGHT + 60);
             populateGridpane(pagesGridPane, list);
             pagesGridPane.setAlignment(Pos.TOP_LEFT);
@@ -57,17 +55,21 @@ public class EfestoController {
         }
     }
 
+    /** */
     public void onEqualsButtonClick() {
         try {
             outputText.setText(applyMethod().toString());
         } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-            outputText.setText("Wrong arguments for " + currentButton.getName() + ".");
+            outputText.setText("Wrong arguments for " + currentOpButton.getName() + ".");
         }
     }
 
-    private Object applyMethod() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
-        Object returnValue = currentButton.getMethod().invoke(null, currentButton.getArgs());
-        System.out.println(returnValue);
+    /** Applies selected method to the selected input*/
+    private Object applyMethod() throws InvocationTargetException, IllegalAccessException, IllegalArgumentException {
+        if(currentOpButton.getMethod().getParameterCount() != currentOpButton.getArgs().length){
+            throw new IllegalArgumentException();
+        }
+        Object returnValue = currentOpButton.getMethod().invoke(null, currentOpButton.getArgs());
         if (returnValue == null) {
             throw new IllegalArgumentException();
         } else {
@@ -81,6 +83,7 @@ public class EfestoController {
      */
     public void onClearButtonClick() {
         inputText.setText("");
+        outputText.setText("");
     }
 
     /**
@@ -88,43 +91,13 @@ public class EfestoController {
      */
     public void onAnsButtonClick() {
         inputText.setText(outputText.getText());
-    }
-
-    /**
-     * Used to create an instance of MFXPageButton, starting from a class.
-     * An MFXPageButton represents a set of operations to perform on the input,
-     * consisting of methods declared in the same class, and is named after it.
-     *
-     * @param c the class, a collection of static methods and constants
-     */
-    private MFXPageButton createPageButton(Class<?> c) {
-
-        MFXPageButton pageButton = new MFXPageButton(c);
-
-        GridPane.setHalignment(pageButton, HPos.CENTER);
-        GridPane.setValignment(pageButton, VPos.CENTER);
-
-        pageButton.setOnAction(event -> {
-            showScrollPane();
-
-            MFXPageButton mfxPageButton = (MFXPageButton) event.getSource();
-
-            GridPane pane = createGridPane(OPS_GRID_WIDTH, OPS_GRID_HEIGHT, BACKGROUND_COLOR + BLACK + ";", getRowsNumber(mfxPageButton.getMethodList().size(), OPS_GRID_COLS), OPS_GRID_COLS, MFXOpButton.HEIGHT + 60);
-
-            List<Node> buttonList = mfxPageButton.getMethodList().stream().map(m -> new MFXOpButton(this, m)).collect(Collectors.toList());
-
-            populateGridpane(pane, buttonList);
-
-            scrollPane.setContent(pane);
-        });
-
-        return pageButton;
+        outputText.setText("");
     }
 
     /**
      * Simple method to set up the ScrollPane's looks for usage.
      */
-    private void showScrollPane() {
+    public void showScrollPane() {
         scrollPane.setOpacity(1);
         scrollPane.setStyle("-fx-background-color: transparent");
     }
@@ -218,40 +191,26 @@ public class EfestoController {
     public MFXScrollPane getScrollPane() {
         return scrollPane;
     }
-
-    public void setScrollPane(MFXScrollPane scrollPane) {
-        this.scrollPane = scrollPane;
-    }
-
-    public AnchorPane getAnchorPane() {
-        return anchorPane;
-    }
-
-    public void setAnchorPane(AnchorPane anchorPane) {
-        this.anchorPane = anchorPane;
-    }
-
     public TextField getInputText() {
         return inputText;
     }
-
-    public void setInputText(TextField inputText) {
-        this.inputText = inputText;
-    }
-
     public TextField getOutputText() {
         return outputText;
     }
 
-    public void setOutputText(TextField outputText) {
-        this.outputText = outputText;
+    public MFXOpButton getCurrentOpButton() {
+        return currentOpButton;
     }
 
-    public MFXOpButton getCurrentButton() {
-        return currentButton;
+    public void setCurrentOpButton(MFXOpButton currentOpButton) {
+        this.currentOpButton = currentOpButton;
     }
 
-    public void setCurrentButton(MFXOpButton currentButton) {
-        this.currentButton = currentButton;
+    public MFXPageButton getCurrentPageButton() {
+        return currentPageButton;
+    }
+
+    public void setCurrentPageButton(MFXPageButton currentPageButton) {
+        this.currentPageButton = currentPageButton;
     }
 }

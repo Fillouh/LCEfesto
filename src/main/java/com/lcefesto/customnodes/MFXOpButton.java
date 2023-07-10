@@ -9,7 +9,6 @@ import javafx.scene.control.TextFormatter;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static com.lcefesto.EfestoController.DEEP_BLACK;
 import static com.lcefesto.EfestoController.LIGHT_GRAY;
@@ -23,8 +22,6 @@ public class MFXOpButton extends MFXButton {
     private final String name;
     private final TextFormatter<?> textFormatter;
     private final Method method;
-
-
 
     /**
      * Given its Controller and a Method, creates an MFXButton associated with the method,
@@ -44,8 +41,12 @@ public class MFXOpButton extends MFXButton {
             TextField outputText = controller.getOutputText();
             String oldText = inputText.getText();
 
-            if (controller.getCurrentButton() != this) {
-                controller.setCurrentButton(this);
+            if (controller.getCurrentOpButton() != this) {
+                if (controller.getCurrentOpButton() != null) {
+                    controller.getCurrentOpButton().setSelected(false);
+                }
+                this.setSelected(true);
+                controller.setCurrentOpButton(this);
                 inputText.setTextFormatter(textFormatter);
             }
 
@@ -53,47 +54,19 @@ public class MFXOpButton extends MFXButton {
             inputText.setPromptText(this.name + Arrays.stream(method.getParameters()).map(p -> p.getType().getName() + " " + p.getName()).toList().toString().replace("[", "(").replace("]", ")"));
             outputText.setPromptText("Returns: " + method.getReturnType().getName());
 
-            if(method.getParameterCount() == 1){
+            if (method.getParameterCount() == 1) {
                 inputText.setText(oldText);
-            }else{
+            }
+            else {
                 inputText.setText("");
                 outputText.setPromptText("Returns: " + method.getReturnType().getName());
             }
         });
-        /*if (singleParameter) {
-            this.textFormatter = getTypeFormatter(method.getParameters()[0].getType());
 
-            this.setOnAction(value -> {
-
-                efestoController.getInputText().setEditable(true);
-                String oldText = efestoController.getInputText().getText();
-
-                if (efestoController.currentButton != this) {
-                    efestoController.currentButton = this;
-                    efestoController.getInputText().setTextFormatter(textFormatter);
-                }
-
-                efestoController.getInputText().setText(oldText);
-            });
-        } else {
-            this.textFormatter = getTypeFormatter(method.getParameters()[0].getType());
-            this.setOnAction(value -> {
-                if (efestoController.currentButton != this) {
-                    efestoController.currentButton = this;
-                }
-                efestoController.getInputText().setTextFormatter(null);
-                efestoController.getInputText().setText(getNameFromMethod(getMethod().getName()) + Arrays.toString((Arrays.stream(getMethod().getParameters()).map(p -> p.getType().getName() + " " + p.getName()).toArray())));
-
-                this.paramDialog = new MFXParamDialog(this);
-                efestoController.getInputText().setText( efestoController.getInputText().getText() +
-                        " : " + Arrays.toString(this.getArgs()));
-
-            });
-        }*/
         setupLooks();
     }
 
-    /** Simple method to set up the opButton's look.*/
+    /** Simple method to set up the opButton's look. */
     private void setupLooks() {
         setButtonType(ButtonType.RAISED);
         setPrefWidth(WIDTH);
@@ -136,11 +109,7 @@ public class MFXOpButton extends MFXButton {
         return buttonName.toString();
     }
 
-
     /* Getters and Setters */
-    public TextFormatter<?> getTextFormatter() {
-        return textFormatter;
-    }
 
     public Method getMethod() {
         return method;
@@ -148,14 +117,24 @@ public class MFXOpButton extends MFXButton {
 
     public Object[] getArgs() {
         TextField inputText = this.controller.getInputText();
-        if( this.textFormatter.getValueConverter().fromString(inputText.getText()) instanceof Object[]) {
+        if (this.textFormatter.getValueConverter().fromString(inputText.getText()) instanceof Object[]) {
             return (Object[]) this.textFormatter.getValueConverter().fromString(inputText.getText());
-        }else{
+        } else {
             return new Object[]{this.textFormatter.getValueConverter().fromString(inputText.getText())};
         }
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setSelected(boolean isSelected) {
+        if (isSelected) {
+            this.setStyle("-fx-background-color: " + DEEP_BLACK + "; -fx-background" + "-radius:" + " 20; "+ "-fx" +
+                    "-text-fill: " + LIGHT_GRAY + "; -fx-alignment: CENTER; -fx-font-size: " + FONT_SIZE + ";" + "-fx-border-color: #C74F39; -fx-border-radius: 20;" );
+        }
+        else {
+            this.setStyle("-fx-background-color: " + DEEP_BLACK + "; -fx-background-radius: 20; -fx-text-fill: " + LIGHT_GRAY + "; -fx-alignment: CENTER; -fx-font-size: " + FONT_SIZE);
+        }
     }
 }
