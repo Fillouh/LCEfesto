@@ -44,7 +44,6 @@ public class EfestoController {
     private MFXPageButton currentPageButton;
 
     public void initialize() {
-
         try {
             List<Node> list = OpsPackage.findPackageClasses("com.lcefesto.ops").stream().map(c -> new MFXPageButton(this, c)).collect(Collectors.toList());
             GridPane pagesGridPane = createGridPane(PAGES_GRID_WIDTH, PAGES_GRID_HEIGHT, BACKGROUND_COLOR + "transparent;", getRowsNumber(list.size(), PAGES_GRID_COLS), PAGES_GRID_COLS, MFXPageButton.PAGE_BUTTON_HEIGHT + 60);
@@ -56,6 +55,7 @@ public class EfestoController {
         }
     }
 
+    /** */
     public void onEqualsButtonClick() {
         try {
             outputText.setText(applyMethod().toString());
@@ -64,9 +64,12 @@ public class EfestoController {
         }
     }
 
-    private Object applyMethod() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+    /** Applies selected method to the selected input*/
+    private Object applyMethod() throws InvocationTargetException, IllegalAccessException, IllegalArgumentException {
+        if(currentOpButton.getMethod().getParameterCount() != currentOpButton.getArgs().length){
+            throw new IllegalArgumentException();
+        }
         Object returnValue = currentOpButton.getMethod().invoke(null, currentOpButton.getArgs());
-        System.out.println(returnValue);
         if (returnValue == null) {
             throw new IllegalArgumentException();
         } else {

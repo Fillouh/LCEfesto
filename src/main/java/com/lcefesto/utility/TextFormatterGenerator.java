@@ -1,45 +1,21 @@
 package com.lcefesto.utility;
 
 import javafx.scene.control.TextFormatter;
+import javafx.util.Pair;
 import javafx.util.StringConverter;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class TextFormatterGenerator<T> {
+public class TextFormatterGenerator {
     public static <T> TextFormatter<T> createTextFormatter(Method method) {
         Class<?>[] parameterTypes = method.getParameterTypes();
-        StringBuilder regexBuilder = new StringBuilder();
-        Object defaultValue;
-
-        if (parameterTypes.length == 1) {
-            Class<?> parameterType = parameterTypes[0];
-            if (parameterType == int.class) {
-                regexBuilder.append("-?\\d+");
-                defaultValue = 0;
-            } else if (parameterType == double.class) {
-                regexBuilder.append("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?([Ee][+-]?[0-9]+)?");
-                defaultValue = 0.0;
-            } else {
-                throw new IllegalArgumentException("Unsupported parameter type: " + parameterType.getSimpleName());
-            }
-        } else {
-            regexBuilder.append("[-\\d.,\\s]+");
-            defaultValue = new Object[parameterTypes.length];
-
-            for (Class<?> parameterType : parameterTypes) {
-                if (parameterType != int.class && parameterType != double.class) {
-                    throw new IllegalArgumentException("Unsupported parameter type: " + parameterType.getSimpleName());
-                }
-            }
-        }
-
-        String regex = regexBuilder.toString();
-
-        Pattern validEditingState = Pattern.compile("^" + regex + "$");
+        Pair<String, Object> filters = createRegex(parameterTypes);
+        Pattern validEditingState = Pattern.compile("^" + filters.getKey() + "$");
 
         StringConverter<T> converter = new StringConverter<>() {
             @Override
@@ -72,14 +48,18 @@ public class TextFormatterGenerator<T> {
 
             @Override
             public String toString(T t) {
-                if (t == null) {
+                if (t == null ) {
                     return "";
                 } else {
                     if (parameterTypes.length == 1) {
                         return t.toString();
                     } else {
                         Object[] values = (Object[]) t;
-                        return Arrays.stream(values).map(Object::toString).collect(Collectors.joining(", "));
+                        if(Arrays.stream(values).allMatch(Objects::isNull)){
+                            return "";
+                        }else{
+                            return Arrays.stream(values).map(Object::toString).collect(Collectors.joining(", "));
+                        }
                     }
                 }
             }
@@ -95,9 +75,38 @@ public class TextFormatterGenerator<T> {
         };
 
         try{
-            return new TextFormatter<T>(converter, (T) defaultValue, filter);
+            return new TextFormatter<>(converter, (T) filters.getValue(), filter);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static Pair<String, Object> createRegex(Class<?>[] parameterTypes){
+        StringBuilder regexBuilder = new StringBuilder();
+        Object defaultValue;
+
+        if (parameterTypes.length == 1) {
+            Class<?> parameterType = parameterTypes[0];
+            if (parameterType == int.class) {
+                regexBuilder.append("-?\\d+");
+                defaultValue = 0;
+            } else if (parameterType == double.class) {
+                regexBuilder.append("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?([Ee][+-]?[0-9]+)?");
+                defaultValue = 0.0;
+            } else {
+                throw new IllegalArgumentException("Unsupported parameter type: " + parameterType.getSimpleName());
+            }
+        } else {
+            regexBuilder.append("[-\\d.,\\s]+");
+            defaultValue = new Object[parameterTypes.length];
+
+            for (Class<?> parameterType : parameterTypes) {
+                if (parameterType != int.class && parameterType != double.class) {
+                    throw new IllegalArgumentException("Unsupported parameter type: " + parameterType.getSimpleName());
+                }
+            }
+        }
+
+        return new Pair<>(regexBuilder.toString(), defaultValue);
     }
 }
