@@ -3,9 +3,11 @@ package com.lcefesto;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class EfestoApplication extends Application {
     @Override
@@ -15,6 +17,7 @@ public class EfestoApplication extends Application {
         stage.setTitle("Efesto");
         stage.setResizable(true);
         stage.setFullScreen(true);
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("efesto64.png"))));
         stage.setScene(scene);
         stage.show();
     }
